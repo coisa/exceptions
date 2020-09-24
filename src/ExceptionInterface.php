@@ -18,6 +18,14 @@ namespace CoiSA\Exception;
  *
  * @package CoiSA\ExceptionFactory
  */
-interface ExceptionInterface
+interface ExceptionInterface extends \Throwable
 {
+    /**
+     * @param string          $message
+     * @param int             $code
+     * @param null|\Exception $previous
+     *
+     * @return self
+     */
+    public static function create($message, $code = 0, \Exception $previous = null);
 }

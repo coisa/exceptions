@@ -24,36 +24,13 @@ class InvalidArgumentException extends \InvalidArgumentException implements Exce
     const TEMPLATE_EXPECTED_CALLABLE_ARGUMENT = 'Given argument "%s" are not a valid callable function.';
 
     /**
-     * @param string          $message
-     * @param int             $code
-     * @param null|\Exception $previous
-     *
-     * @return InvalidArgumentException
-     *
-     * @see ExceptionFactory::create()
+     * {@inheritDoc}
      */
-    public static function create($message, $code = 0, $previous = null)
+    public static function create($message, $code = 0, \Exception $previous = null)
     {
         $exceptionClass = \get_called_class();
 
-        return ExceptionFactory::create($exceptionClass, $message, $code, $previous);
-    }
-
-    /**
-     * @param string $message
-     * @param int    $code
-     *
-     * @return InvalidArgumentException
-     *
-     * @see ExceptionFactory::fromPrevious()
-     */
-    public static function fromPrevious(\Exception $previous, $message = null, $code = null)
-    {
-        $exceptionClass = \get_called_class();
-        $message        = $message ?: $previous->getMessage();
-        $code           = $code ?: $previous->getCode();
-
-        return ExceptionFactory::fromPrevious($exceptionClass, $previous, $message, $code);
+        return new $exceptionClass($message, $code, $previous);
     }
 
     /**

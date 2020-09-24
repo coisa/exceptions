@@ -21,35 +21,29 @@ namespace CoiSA\Exception;
 class ReflectionException extends \ReflectionException implements ExceptionInterface
 {
     /**
-     * @param string          $message
-     * @param int             $code
-     * @param null|\Exception $previous
-     *
-     * @return ReflectionException
-     *
-     * @see ExceptionFactory::create()
+     * {@inheritDoc}
      */
-    public static function create($message, $code = 0, $previous = null)
+    public static function create($message, $code = 0, \Exception $previous = null)
     {
         $exceptionClass = \get_called_class();
 
-        return ExceptionFactory::create($exceptionClass, $message, $code, $previous);
+        return new $exceptionClass($message, $code, $previous);
     }
 
     /**
-     * @param string $message
-     * @param int    $code
+     * @param string $class
+     * @param string $subclass
      *
-     * @return ReflectionException
-     *
-     * @see ExceptionFactory::fromPrevious()
+     * @return \CoiSA\Factory\Exception\ReflectionException
      */
-    public static function fromPrevious(\Exception $previous, $message = null, $code = null)
+    public static function forClassNotSubclassOf($class, $subclass)
     {
-        $exceptionClass = \get_called_class();
-        $message        = $message ?: $previous->getMessage();
-        $code           = $code ?: $previous->getCode();
+        $message = \sprintf(
+            'Given class "%s" are not a subclass of "%s".',
+            $class,
+            $subclass
+        );
 
-        return ExceptionFactory::fromPrevious($exceptionClass, $previous, $message, $code);
+        return self::create($message);
     }
 }

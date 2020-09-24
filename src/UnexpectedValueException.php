@@ -27,36 +27,13 @@ class UnexpectedValueException extends \UnexpectedValueException implements Exce
     const TEMPLATE_MESSAGE_CLASS_NOT_FOUND = 'Class "%s" not found!';
 
     /**
-     * @param string          $message
-     * @param int             $code
-     * @param null|\Exception $previous
-     *
-     * @return UnexpectedValueException
-     *
-     * @see ExceptionFactory::create()
+     * {@inheritDoc}
      */
-    public static function create($message, $code = 0, $previous = null)
+    public static function create($message, $code = 0, \Exception $previous = null)
     {
         $exceptionClass = \get_called_class();
 
-        return ExceptionFactory::create($exceptionClass, $message, $code, $previous);
-    }
-
-    /**
-     * @param string $message
-     * @param int    $code
-     *
-     * @return UnexpectedValueException
-     *
-     * @see ExceptionFactory::fromPrevious()
-     */
-    public static function fromPrevious(\Exception $previous, $message = null, $code = null)
-    {
-        $exceptionClass = \get_called_class();
-        $message        = $message ?: $previous->getMessage();
-        $code           = $code ?: $previous->getCode();
-
-        return ExceptionFactory::fromPrevious($exceptionClass, $previous, $message, $code);
+        return new $exceptionClass($message, $code, $previous);
     }
 
     /**

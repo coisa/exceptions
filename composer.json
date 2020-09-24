@@ -31,6 +31,9 @@
         }
     },
     "autoload": {
+        "files": [
+            "config/autoload.php"
+        ],
         "psr-4": {
             "CoiSA\\Factory\\": "src"
         }

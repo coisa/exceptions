@@ -14,12 +14,15 @@
 namespace CoiSA\Exception;
 
 /**
- * Class OutOfBoundsException
+ * Class BadFunctionCallException
  *
  * @package CoiSA\ExceptionFactory
  */
-class OutOfBoundsException extends \OutOfBoundsException implements ExceptionInterface
+class BadFunctionCallException extends \BadFunctionCallException implements ExceptionInterface
 {
+    /** @const string */
+    const TEMPLATE_EXPECTED_AT_LEAST_ONE_ARGUMENT = 'You should inform at least one argument.';
+
     /**
      * {@inheritDoc}
      */
@@ -28,5 +31,20 @@ class OutOfBoundsException extends \OutOfBoundsException implements ExceptionInt
         $exceptionClass = \get_called_class();
 
         return new $exceptionClass($message, $code, $previous);
+    }
+
+    /**
+     * @param int                        $code
+     * @param null|\Exception|\Throwable $previous
+     *
+     * @return BadFunctionCallException
+     */
+    public static function forExpectedAtLeaseOneArgument($code = 0, $previous = null)
+    {
+        return self::create(
+            self::TEMPLATE_EXPECTED_AT_LEAST_ONE_ARGUMENT,
+            $code,
+            $previous
+        );
     }
 }

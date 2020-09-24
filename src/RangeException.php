@@ -14,11 +14,11 @@
 namespace CoiSA\Exception;
 
 /**
- * Class OutOfBoundsException
+ * Class RangeException
  *
- * @package CoiSA\ExceptionFactory
+ * @package CoiSA\Exception
  */
-class OutOfBoundsException extends \OutOfBoundsException implements ExceptionInterface
+class RangeException extends \RangeException implements ExceptionInterface
 {
     /**
      * {@inheritDoc}

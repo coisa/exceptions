@@ -24,36 +24,13 @@ class BadMethodCallException extends \BadMethodCallException implements Exceptio
     const TEMPLATE_EXPECTED_AT_LEAST_ONE_ARGUMENT = 'You should inform at least one argument.';
 
     /**
-     * @param string          $message
-     * @param int             $code
-     * @param null|\Exception $previous
-     *
-     * @return BadMethodCallException
-     *
-     * @see ExceptionFactory::create()
+     * {@inheritDoc}
      */
-    public static function create($message, $code = 0, $previous = null)
+    public static function create($message, $code = 0, \Exception $previous = null)
     {
         $exceptionClass = \get_called_class();
 
-        return ExceptionFactory::create($exceptionClass, $message, $code, $previous);
-    }
-
-    /**
-     * @param string $message
-     * @param int    $code
-     *
-     * @return BadMethodCallException
-     *
-     * @see ExceptionFactory::fromPrevious()
-     */
-    public static function fromPrevious(\Exception $previous, $message = null, $code = null)
-    {
-        $exceptionClass = \get_called_class();
-        $message        = $message ?: $previous->getMessage();
-        $code           = $code ?: $previous->getCode();
-
-        return ExceptionFactory::fromPrevious($exceptionClass, $previous, $message, $code);
+        return new $exceptionClass($message, $code, $previous);
     }
 
     /**
