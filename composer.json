@@ -32,7 +32,7 @@
     },
     "autoload": {
         "psr-4": {
-            "": "src/Core",
+            "": "polyfill",
             "CoiSA\\Exception\\": "src"
         }
     },

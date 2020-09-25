@@ -11,10 +11,15 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
-# docker run --rm --volume $PWD:/app php:5.3 php /app/examples/index.php
-\var_dump(
-    \CoiSA\Exception\ArgumentCountError::forExpectedAtLeaseOneArgument(),
-    \get_included_files()
-);
+namespace {
+    if (false === \class_exists('CompileError')) {
+        /**
+         * Class CompileError
+         * @link https://secure.php.net/manual/en/class.compileerror.php
+         * @since 7.3
+         */
+        class CompileError extends Error
+        {
+        }
+    }
+}

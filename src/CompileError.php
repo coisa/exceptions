@@ -14,11 +14,11 @@
 namespace CoiSA\Exception;
 
 /**
- * Class BadFunctionCallException
+ * Class CompileError
  *
  * @package CoiSA\Exception
  */
-class BadFunctionCallException extends \BadFunctionCallException implements ExceptionInterface, ExceptionFactoryInterface
+class CompileError extends \CompileError implements ExceptionInterface, ExceptionFactoryInterface
 {
     /**
      * {@inheritDoc}

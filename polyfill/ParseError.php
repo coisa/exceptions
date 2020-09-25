@@ -19,7 +19,7 @@ namespace {
          * @link http://php.net/manual/en/class.parseerror.php
          * @since 7.0
          */
-        class ParseError extends Error
+        class ParseError extends CompileError
         {
         }
     }

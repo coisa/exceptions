@@ -14,12 +14,15 @@
 namespace CoiSA\Exception;
 
 /**
- * Class BadFunctionCallException
+ * Class ArgumentCountError
  *
  * @package CoiSA\Exception
  */
-class BadFunctionCallException extends \BadFunctionCallException implements ExceptionInterface, ExceptionFactoryInterface
+class ArgumentCountError extends \ArgumentCountError implements ExceptionInterface, ExceptionFactoryInterface
 {
+    /** @const string */
+    const TEMPLATE_EXPECTED_AT_LEAST_ONE_ARGUMENT = 'You should inform at least one argument.';
+
     /**
      * {@inheritDoc}
      */
@@ -28,5 +31,20 @@ class BadFunctionCallException extends \BadFunctionCallException implements Exce
         $exceptionClass = \get_called_class();
 
         return new $exceptionClass($message, $code, $previous);
+    }
+
+    /**
+     * @param int                        $code
+     * @param null|\Exception|\Throwable $previous
+     *
+     * @return ArgumentCountError
+     */
+    public static function forExpectedAtLeaseOneArgument($code = 0, $previous = null)
+    {
+        return self::create(
+            self::TEMPLATE_EXPECTED_AT_LEAST_ONE_ARGUMENT,
+            $code,
+            $previous
+        );
     }
 }

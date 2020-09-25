@@ -19,7 +19,7 @@ namespace {
          * @link http://php.net/manual/en/class.divisionbyzeroerror.php
          * @since 7.0
          */
-        class DivisionByZeroError extends Error
+        class DivisionByZeroError extends ArithmeticError
         {
         }
     }
