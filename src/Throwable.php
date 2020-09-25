@@ -14,19 +14,10 @@
 namespace CoiSA\Exception;
 
 /**
- * Class DomainException
+ * Interface Throwable
  *
  * @package CoiSA\Exception
  */
-class DomainException extends \DomainException implements ExceptionInterface, ExceptionFactoryInterface
+interface Throwable extends \Throwable
 {
-    /**
-     * {@inheritDoc}
-     */
-    public static function create($message, $code = 0, \Exception $previous = null)
-    {
-        $exceptionClass = \get_called_class();
-
-        return new $exceptionClass($message, $code, $previous);
-    }
 }

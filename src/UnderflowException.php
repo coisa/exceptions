@@ -18,7 +18,7 @@ namespace CoiSA\Exception;
  *
  * @package CoiSA\Exception
  */
-class UnderflowException extends \UnderflowException implements ExceptionInterface
+class UnderflowException extends \UnderflowException implements ExceptionInterface, ExceptionFactoryInterface
 {
     /**
      * {@inheritDoc}

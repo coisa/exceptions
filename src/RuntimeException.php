@@ -16,9 +16,9 @@ namespace CoiSA\Exception;
 /**
  * Class RuntimeException
  *
- * @package CoiSA\ExceptionFactory
+ * @package CoiSA\Exception
  */
-class RuntimeException extends \RuntimeException implements ExceptionInterface
+class RuntimeException extends \RuntimeException implements ExceptionInterface, ExceptionFactoryInterface
 {
     /**
      * {@inheritDoc}

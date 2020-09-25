@@ -16,9 +16,9 @@ namespace CoiSA\Exception;
 /**
  * Class ReflectionException
  *
- * @package CoiSA\ExceptionFactory
+ * @package CoiSA\Exception
  */
-class ReflectionException extends \ReflectionException implements ExceptionInterface
+class ReflectionException extends \ReflectionException implements ExceptionInterface, ExceptionFactoryInterface
 {
     /**
      * {@inheritDoc}

@@ -31,16 +31,14 @@
         }
     },
     "autoload": {
-        "files": [
-            "config/autoload.php"
-        ],
         "psr-4": {
-            "CoiSA\\Factory\\": "src"
+            "": "src/Core",
+            "CoiSA\\Exception\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "CoiSA\\Factory\\": "tests"
+            "CoiSA\\Exception\\": "tests"
         }
     },
     "minimum-stability": "stable",

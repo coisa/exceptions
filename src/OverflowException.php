@@ -18,7 +18,7 @@ namespace CoiSA\Exception;
  *
  * @package CoiSA\Exception
  */
-class OverflowException extends \OverflowException implements ExceptionInterface
+class OverflowException extends \OverflowException implements ExceptionInterface, ExceptionFactoryInterface
 {
     /**
      * {@inheritDoc}

@@ -16,9 +16,9 @@ namespace CoiSA\Exception;
 /**
  * Class LengthException
  *
- * @package CoiSA\ExceptionFactory
+ * @package CoiSA\Exception
  */
-class LengthException extends \LengthException implements ExceptionInterface
+class LengthException extends \LengthException implements ExceptionInterface, ExceptionFactoryInterface
 {
     /**
      * {@inheritDoc}

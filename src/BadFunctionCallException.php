@@ -16,9 +16,9 @@ namespace CoiSA\Exception;
 /**
  * Class BadFunctionCallException
  *
- * @package CoiSA\ExceptionFactory
+ * @package CoiSA\Exception
  */
-class BadFunctionCallException extends \BadFunctionCallException implements ExceptionInterface
+class BadFunctionCallException extends \BadFunctionCallException implements ExceptionInterface, ExceptionFactoryInterface
 {
     /** @const string */
     const TEMPLATE_EXPECTED_AT_LEAST_ONE_ARGUMENT = 'You should inform at least one argument.';

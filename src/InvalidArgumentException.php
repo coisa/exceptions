@@ -16,9 +16,9 @@ namespace CoiSA\Exception;
 /**
  * Class InvalidArgumentException
  *
- * @package CoiSA\ExceptionFactory
+ * @package CoiSA\Exception
  */
-class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
+class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface, ExceptionFactoryInterface
 {
     /** @const string */
     const TEMPLATE_EXPECTED_CALLABLE_ARGUMENT = 'Given argument "%s" are not a valid callable function.';

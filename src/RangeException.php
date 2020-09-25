@@ -18,7 +18,7 @@ namespace CoiSA\Exception;
  *
  * @package CoiSA\Exception
  */
-class RangeException extends \RangeException implements ExceptionInterface
+class RangeException extends \RangeException implements ExceptionInterface, ExceptionFactoryInterface
 {
     /**
      * {@inheritDoc}

@@ -16,9 +16,9 @@ namespace CoiSA\Exception;
 /**
  * Class UnexpectedValueException
  *
- * @package CoiSA\ExceptionFactory
+ * @package CoiSA\Exception
  */
-class UnexpectedValueException extends \UnexpectedValueException implements ExceptionInterface
+class UnexpectedValueException extends \UnexpectedValueException implements ExceptionInterface, ExceptionFactoryInterface
 {
     /** @const string */
     const TEMPLATE_MESSAGE_EXPECTED_CLASS_IMPLEMENTS = 'Expected class "%s" to implement "%s".';
