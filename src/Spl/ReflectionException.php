@@ -11,14 +11,16 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-namespace CoiSA\Exception;
+namespace CoiSA\Exception\Spl;
+
+use CoiSA\Exception\ExceptionInterface;
 
 /**
- * Class ArithmeticError
+ * Class ReflectionException
  *
- * @package CoiSA\Exception
+ * @package CoiSA\Exception\Spl
  */
-class ArithmeticError extends \ArithmeticError implements ExceptionInterface, ExceptionFactoryInterface
+class ReflectionException extends \ReflectionException implements ExceptionInterface
 {
     /**
      * {@inheritDoc}
@@ -28,5 +30,22 @@ class ArithmeticError extends \ArithmeticError implements ExceptionInterface, Ex
         $exceptionClass = \get_called_class();
 
         return new $exceptionClass($message, $code, $previous);
+    }
+
+    /**
+     * @param string $class
+     * @param string $subclass
+     *
+     * @return \CoiSA\Factory\Exception\ReflectionException
+     */
+    public static function forClassNotSubclassOf($class, $subclass)
+    {
+        $message = \sprintf(
+            'Given class "%s" are not a subclass of "%s".',
+            $class,
+            $subclass
+        );
+
+        return self::create($message);
     }
 }

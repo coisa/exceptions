@@ -11,14 +11,16 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-namespace CoiSA\Exception;
+namespace CoiSA\Exception\Core;
+
+use CoiSA\Exception\ExceptionInterface;
 
 /**
- * Class OutOfRangeException
+ * Class AssertionError
  *
- * @package CoiSA\Exception
+ * @package CoiSA\Exception\Core
  */
-class OutOfRangeException extends \OutOfRangeException implements ExceptionInterface, ExceptionFactoryInterface
+class AssertionError extends \AssertionError implements ExceptionInterface
 {
     /**
      * {@inheritDoc}

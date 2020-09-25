@@ -11,14 +11,16 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-namespace CoiSA\Exception;
+namespace CoiSA\Exception\Core;
+
+use CoiSA\Exception\ExceptionInterface;
 
 /**
- * Class DivisionByZeroError
+ * Class ArithmeticError
  *
- * @package CoiSA\Exception
+ * @package CoiSA\Exception\Core
  */
-class DivisionByZeroError extends \DivisionByZeroError implements ExceptionInterface, ExceptionFactoryInterface
+class ArithmeticError extends \ArithmeticError implements ExceptionInterface
 {
     /**
      * {@inheritDoc}

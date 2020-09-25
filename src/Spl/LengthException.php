@@ -11,14 +11,16 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-namespace CoiSA\Exception;
+namespace CoiSA\Exception\Spl;
+
+use CoiSA\Exception\ExceptionInterface;
 
 /**
- * Class AssertionError
+ * Class LengthException
  *
- * @package CoiSA\Exception
+ * @package CoiSA\Exception\Spl
  */
-class AssertionError extends \AssertionError implements ExceptionInterface, ExceptionFactoryInterface
+class LengthException extends \LengthException implements ExceptionInterface
 {
     /**
      * {@inheritDoc}

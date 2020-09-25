@@ -32,9 +32,11 @@
     },
     "autoload": {
         "psr-4": {
-            "": "polyfill",
             "CoiSA\\Exception\\": "src"
-        }
+        },
+        "classmap": [
+            "polyfill"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

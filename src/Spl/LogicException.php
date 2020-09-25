@@ -11,14 +11,16 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-namespace CoiSA\Exception;
+namespace CoiSA\Exception\Spl;
+
+use CoiSA\Exception\ExceptionInterface;
 
 /**
- * Class UnderflowException
+ * Class LogicException
  *
- * @package CoiSA\Exception
+ * @package CoiSA\Exception\Spl
  */
-class UnderflowException extends \UnderflowException implements ExceptionInterface, ExceptionFactoryInterface
+class LogicException extends \LogicException implements ExceptionInterface
 {
     /**
      * {@inheritDoc}

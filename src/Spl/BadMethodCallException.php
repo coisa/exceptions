@@ -11,14 +11,16 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-namespace CoiSA\Exception;
+namespace CoiSA\Exception\Spl;
+
+use CoiSA\Exception\ExceptionInterface;
 
 /**
  * Class BadMethodCallException
  *
- * @package CoiSA\Exception
+ * @package CoiSA\Exception\Spl
  */
-class BadMethodCallException extends \BadMethodCallException implements ExceptionInterface, ExceptionFactoryInterface
+class BadMethodCallException extends \BadMethodCallException implements ExceptionInterface
 {
     /**
      * {@inheritDoc}

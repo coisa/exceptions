@@ -11,14 +11,16 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-namespace CoiSA\Exception;
+namespace CoiSA\Exception\Core;
+
+use CoiSA\Exception\ExceptionInterface;
 
 /**
  * Class Error
  *
- * @package CoiSA\Exception
+ * @package CoiSA\Exception\Core
  */
-class ParseError extends \ParseError implements ExceptionInterface, ExceptionFactoryInterface
+class ParseError extends \ParseError implements ExceptionInterface
 {
     /**
      * {@inheritDoc}

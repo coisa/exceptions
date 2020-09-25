@@ -11,14 +11,16 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-namespace CoiSA\Exception;
+namespace CoiSA\Exception\Spl;
+
+use CoiSA\Exception\ExceptionInterface;
 
 /**
  * Class UnexpectedValueException
  *
- * @package CoiSA\Exception
+ * @package CoiSA\Exception\Spl
  */
-class UnexpectedValueException extends \UnexpectedValueException implements ExceptionInterface, ExceptionFactoryInterface
+class UnexpectedValueException extends \UnexpectedValueException implements ExceptionInterface
 {
     /** @const string */
     const TEMPLATE_MESSAGE_EXPECTED_CLASS_IMPLEMENTS = 'Expected class "%s" to implement "%s".';

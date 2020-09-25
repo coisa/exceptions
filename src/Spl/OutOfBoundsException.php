@@ -11,14 +11,16 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-namespace CoiSA\Exception;
+namespace CoiSA\Exception\Spl;
+
+use CoiSA\Exception\ExceptionInterface;
 
 /**
  * Class OutOfBoundsException
  *
- * @package CoiSA\Exception
+ * @package CoiSA\Exception\Spl
  */
-class OutOfBoundsException extends \OutOfBoundsException implements ExceptionInterface, ExceptionFactoryInterface
+class OutOfBoundsException extends \OutOfBoundsException implements ExceptionInterface
 {
     /**
      * {@inheritDoc}

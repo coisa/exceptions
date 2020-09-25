@@ -11,19 +11,19 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-namespace CoiSA\Exception;
+namespace CoiSA\Exception\Core;
+
+use CoiSA\Exception\ExceptionInterface;
 
 /**
- * Class InvalidArgumentException
+ * Class ArgumentCountError
  *
- * @package CoiSA\Exception
+ * @package CoiSA\Exception\Core
  */
-class InvalidArgumentException extends \InvalidArgumentException implements
-    ExceptionInterface,
-    ExceptionFactoryInterface
+class ArgumentCountError extends \ArgumentCountError implements ExceptionInterface
 {
     /** @const string */
-    const TEMPLATE_EXPECTED_CALLABLE_ARGUMENT = 'Given argument "%s" are not a valid callable function.';
+    const TEMPLATE_EXPECTED_AT_LEAST_ONE_ARGUMENT = 'You should inform at least one argument.';
 
     /**
      * {@inheritDoc}
@@ -36,19 +36,17 @@ class InvalidArgumentException extends \InvalidArgumentException implements
     }
 
     /**
-     * @param mixed                      $argument
      * @param int                        $code
      * @param null|\Exception|\Throwable $previous
      *
-     * @return InvalidArgumentException
+     * @return ArgumentCountError
      */
-    public static function forExpectedCallableArgument($argument, $code = 0, $previous = null)
+    public static function forExpectedAtLeaseOneArgument($code = 0, $previous = null)
     {
-        $message = \sprintf(
-            self::TEMPLATE_EXPECTED_CALLABLE_ARGUMENT,
-            $argument
+        return self::create(
+            self::TEMPLATE_EXPECTED_AT_LEAST_ONE_ARGUMENT,
+            $code,
+            $previous
         );
-
-        return self::create($message, $code, $previous);
     }
 }

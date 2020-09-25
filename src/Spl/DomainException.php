@@ -11,14 +11,16 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-namespace CoiSA\Exception;
+namespace CoiSA\Exception\Spl;
+
+use CoiSA\Exception\ExceptionInterface;
 
 /**
- * Class Error
+ * Class DomainException
  *
- * @package CoiSA\Exception
+ * @package CoiSA\Exception\Spl
  */
-class TypeError extends \TypeError implements ExceptionInterface, ExceptionFactoryInterface
+class DomainException extends \DomainException implements ExceptionInterface
 {
     /**
      * {@inheritDoc}

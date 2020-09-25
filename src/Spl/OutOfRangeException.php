@@ -11,14 +11,16 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-namespace CoiSA\Exception;
+namespace CoiSA\Exception\Spl;
+
+use CoiSA\Exception\ExceptionInterface;
 
 /**
- * Class OverflowException
+ * Class OutOfRangeException
  *
- * @package CoiSA\Exception
+ * @package CoiSA\Exception\Spl
  */
-class OverflowException extends \OverflowException implements ExceptionInterface, ExceptionFactoryInterface
+class OutOfRangeException extends \OutOfRangeException implements ExceptionInterface
 {
     /**
      * {@inheritDoc}

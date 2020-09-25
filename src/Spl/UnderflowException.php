@@ -11,14 +11,16 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-namespace CoiSA\Exception;
+namespace CoiSA\Exception\Spl;
+
+use CoiSA\Exception\ExceptionInterface;
 
 /**
- * Class LengthException
+ * Class UnderflowException
  *
- * @package CoiSA\Exception
+ * @package CoiSA\Exception\Spl
  */
-class LengthException extends \LengthException implements ExceptionInterface, ExceptionFactoryInterface
+class UnderflowException extends \UnderflowException implements ExceptionInterface
 {
     /**
      * {@inheritDoc}

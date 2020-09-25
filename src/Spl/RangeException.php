@@ -11,14 +11,16 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-namespace CoiSA\Exception;
+namespace CoiSA\Exception\Spl;
+
+use CoiSA\Exception\ExceptionInterface;
 
 /**
- * Class RuntimeException
+ * Class RangeException
  *
- * @package CoiSA\Exception
+ * @package CoiSA\Exception\Spl
  */
-class RuntimeException extends \RuntimeException implements ExceptionInterface, ExceptionFactoryInterface
+class RangeException extends \RangeException implements ExceptionInterface
 {
     /**
      * {@inheritDoc}

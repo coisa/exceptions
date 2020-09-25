@@ -11,14 +11,16 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-namespace CoiSA\Exception;
+namespace CoiSA\Exception\Core;
+
+use CoiSA\Exception\ExceptionInterface;
 
 /**
- * Class RangeException
+ * Class Error
  *
- * @package CoiSA\Exception
+ * @package CoiSA\Exception\Core
  */
-class RangeException extends \RangeException implements ExceptionInterface, ExceptionFactoryInterface
+class Exception extends \Exception implements ExceptionInterface
 {
     /**
      * {@inheritDoc}

@@ -11,14 +11,16 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-namespace CoiSA\Exception;
+namespace CoiSA\Exception\Core;
+
+use CoiSA\Exception\ExceptionInterface;
 
 /**
- * Class ReflectionException
+ * Class CompileError
  *
- * @package CoiSA\Exception
+ * @package CoiSA\Exception\Core
  */
-class ReflectionException extends \ReflectionException implements ExceptionInterface, ExceptionFactoryInterface
+class CompileError extends \CompileError implements ExceptionInterface
 {
     /**
      * {@inheritDoc}
@@ -28,22 +30,5 @@ class ReflectionException extends \ReflectionException implements ExceptionInter
         $exceptionClass = \get_called_class();
 
         return new $exceptionClass($message, $code, $previous);
-    }
-
-    /**
-     * @param string $class
-     * @param string $subclass
-     *
-     * @return \CoiSA\Factory\Exception\ReflectionException
-     */
-    public static function forClassNotSubclassOf($class, $subclass)
-    {
-        $message = \sprintf(
-            'Given class "%s" are not a subclass of "%s".',
-            $class,
-            $subclass
-        );
-
-        return self::create($message);
     }
 }
