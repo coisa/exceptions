@@ -11,16 +11,16 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-namespace CoiSA\Exception\Core;
+namespace CoiSA\Exception\Json;
 
 use CoiSA\Exception\ExceptionInterface;
 
 /**
- * Class ArgumentCountError
+ * Class JsonException
  *
- * @package CoiSA\Exception\Core
+ * @package CoiSA\Exception\Json
  */
-class ArgumentCountError extends \ArgumentCountError implements ExceptionInterface
+class JsonException extends \JsonException implements ExceptionInterface
 {
     /**
      * {@inheritDoc}
@@ -30,20 +30,5 @@ class ArgumentCountError extends \ArgumentCountError implements ExceptionInterfa
         $exceptionClass = \get_called_class();
 
         return new $exceptionClass($message, $code, $previous);
-    }
-
-    /**
-     * @param int                        $code
-     * @param null|\Exception|\Throwable $previous
-     *
-     * @return ArgumentCountError
-     */
-    public static function forExpectedAtLeaseOneArgument($code = 0, $previous = null)
-    {
-        return self::create(
-            'You should inform at least one argument.',
-            $code,
-            $previous
-        );
     }
 }

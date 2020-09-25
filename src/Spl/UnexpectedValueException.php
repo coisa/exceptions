@@ -22,12 +22,6 @@ use CoiSA\Exception\ExceptionInterface;
  */
 class UnexpectedValueException extends \UnexpectedValueException implements ExceptionInterface
 {
-    /** @const string */
-    const TEMPLATE_MESSAGE_EXPECTED_CLASS_IMPLEMENTS = 'Expected class "%s" to implement "%s".';
-
-    /** @const string */
-    const TEMPLATE_MESSAGE_CLASS_NOT_FOUND = 'Class "%s" not found!';
-
     /**
      * {@inheritDoc}
      */
@@ -36,41 +30,5 @@ class UnexpectedValueException extends \UnexpectedValueException implements Exce
         $exceptionClass = \get_called_class();
 
         return new $exceptionClass($message, $code, $previous);
-    }
-
-    /**
-     * @param string                     $class
-     * @param string                     $implements
-     * @param int                        $code
-     * @param null|\Exception|\Throwable $previous
-     *
-     * @return UnexpectedValueException
-     */
-    public static function forExpectedClassImplements($class, $implements, $code = 0, $previous = null)
-    {
-        $message = \sprintf(
-            self::TEMPLATE_MESSAGE_EXPECTED_CLASS_IMPLEMENTS,
-            $class,
-            $implements
-        );
-
-        return self::create($message, $code, $previous);
-    }
-
-    /**
-     * @param string                     $class
-     * @param int                        $code
-     * @param null|\Exception|\Throwable $previous
-     *
-     * @return UnexpectedValueException
-     */
-    public static function forClassNotFound($class, $code = 0, $previous = null)
-    {
-        $message = \sprintf(
-            self::TEMPLATE_MESSAGE_CLASS_NOT_FOUND,
-            $class
-        );
-
-        return self::create($message, $code, $previous);
     }
 }

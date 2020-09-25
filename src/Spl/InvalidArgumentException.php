@@ -22,9 +22,6 @@ use CoiSA\Exception\ExceptionInterface;
  */
 class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
-    /** @const string */
-    const TEMPLATE_EXPECTED_CALLABLE_ARGUMENT = 'Given argument "%s" are not a valid callable function.';
-
     /**
      * {@inheritDoc}
      */
@@ -36,17 +33,19 @@ class InvalidArgumentException extends \InvalidArgumentException implements Exce
     }
 
     /**
-     * @param mixed                      $argument
-     * @param int                        $code
-     * @param null|\Exception|\Throwable $previous
+     * @param string          $argument
+     * @param string          $type
+     * @param int             $code
+     * @param null|\Exception $previous
      *
      * @return InvalidArgumentException
      */
-    public static function forExpectedCallableArgument($argument, $code = 0, $previous = null)
+    public static function forExpectedArgumentType($argument, $type, $code = 0, $previous = null)
     {
         $message = \sprintf(
-            self::TEMPLATE_EXPECTED_CALLABLE_ARGUMENT,
-            $argument
+            'Given argument "%s" should be of type "%s".',
+            $argument,
+            $type
         );
 
         return self::create($message, $code, $previous);

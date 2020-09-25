@@ -33,6 +33,22 @@ class ReflectionException extends \ReflectionException implements ExceptionInter
     }
 
     /**
+     * @param string                     $class
+     * @param int                        $code
+     * @param null|\Exception|\Throwable $previous
+     *
+     * @return UnexpectedValueException
+     */
+    public static function forClassNotFound($class, $code = 0, $previous = null)
+    {
+        $message = \sprintf(
+            'Class "%s" not found!',
+            $class
+        );
+
+        return self::create($message, $code, $previous);
+    }
+    /**
      * @param string $class
      * @param string $subclass
      *
