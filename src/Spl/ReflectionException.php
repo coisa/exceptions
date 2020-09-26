@@ -48,6 +48,7 @@ class ReflectionException extends \ReflectionException implements ExceptionInter
 
         return self::create($message, $code, $previous);
     }
+
     /**
      * @param string $class
      * @param string $subclass

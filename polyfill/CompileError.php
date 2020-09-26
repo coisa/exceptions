@@ -15,6 +15,7 @@ namespace {
     if (false === \class_exists('CompileError')) {
         /**
          * Class CompileError
+         *
          * @link https://secure.php.net/manual/en/class.compileerror.php
          * @since 7.3
          */
