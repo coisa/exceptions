@@ -33,19 +33,19 @@ class InvalidArgumentException extends \InvalidArgumentException implements Exce
     }
 
     /**
-     * @param string          $argument
-     * @param string          $type
+     * @param string          $argumentName
+     * @param string          $expectedType
      * @param int             $code
      * @param null|\Exception $previous
      *
      * @return InvalidArgumentException
      */
-    public static function forExpectedArgumentType($argument, $type, $code = 0, $previous = null)
+    public static function forInvalidArgumentType($argumentName, $expectedType, $code = 0, $previous = null)
     {
         $message = \sprintf(
             'Given argument "%s" should be of type "%s".',
-            $argument,
-            $type
+            $argumentName,
+            $expectedType
         );
 
         return self::create($message, $code, $previous);

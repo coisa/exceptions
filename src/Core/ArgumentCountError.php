@@ -33,17 +33,47 @@ class ArgumentCountError extends \ArgumentCountError implements ExceptionInterfa
     }
 
     /**
-     * @param int                        $code
-     * @param null|\Exception|\Throwable $previous
+     * @param int             $code
+     * @param null|\Exception $previous
      *
      * @return ArgumentCountError
      */
-    public static function forExpectedAtLeaseOneArgument($code = 0, $previous = null)
+    public static function forExpectedZeroArgumentCount($code = 0, \Exception $previous = null)
     {
-        return self::create(
-            'You should inform at least one argument.',
-            $code,
-            $previous
+        return self::create('This closure do not expect any argument.', $code, $previous);
+    }
+
+    /**
+     * @param int             $length
+     * @param int             $code
+     * @param null|\Exception $previous
+     *
+     * @return ArgumentCountError
+     */
+    public static function forExpectedCountLessThan($length = 1, $code = 0, \Exception $previous = null)
+    {
+        $message = \sprintf(
+            'You should inform at least "%d" arguments.',
+            $length
         );
+
+        return self::create($message, $code, $previous);
+    }
+
+    /**
+     * @param int             $length
+     * @param int             $code
+     * @param null|\Exception $previous
+     *
+     * @return ArgumentCountError
+     */
+    public static function forExpectedExactCount($length = 1, $code = 0, \Exception $previous = null)
+    {
+        $message = \sprintf(
+            'You should inform exactly "%d" arguments.',
+            $length
+        );
+
+        return self::create($message, $code, $previous);
     }
 }
