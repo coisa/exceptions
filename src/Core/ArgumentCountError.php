@@ -22,6 +22,15 @@ use CoiSA\Exception\ExceptionInterface;
  */
 class ArgumentCountError extends \ArgumentCountError implements ExceptionInterface
 {
+    /** @const string */
+    const MESSAGE_EXPECTED_NO_ARGUMENT = 'This closure do not expect any argument.';
+
+    /** @const string */
+    const MESSAGE_EXPECTED_AT_LEAST = 'You should inform at least "%d" arguments.';
+
+    /** @const string */
+    const MESSAGE_EXPECTED_EXACT_AMOUNT = 'You should inform exactly "%d" arguments.';
+
     /**
      * {@inheritDoc}
      */
@@ -38,9 +47,9 @@ class ArgumentCountError extends \ArgumentCountError implements ExceptionInterfa
      *
      * @return ArgumentCountError
      */
-    public static function forExpectedZeroArgumentCount($code = 0, \Exception $previous = null)
+    public static function forExpectedNoArgument($code = 0, \Exception $previous = null)
     {
-        return self::create('This closure do not expect any argument.', $code, $previous);
+        return self::create(self::MESSAGE_EXPECTED_NO_ARGUMENT, $code, $previous);
     }
 
     /**
@@ -50,10 +59,10 @@ class ArgumentCountError extends \ArgumentCountError implements ExceptionInterfa
      *
      * @return ArgumentCountError
      */
-    public static function forExpectedCountLessThan($length = 1, $code = 0, \Exception $previous = null)
+    public static function forExpectedAtLeast($length = 1, $code = 0, \Exception $previous = null)
     {
         $message = \sprintf(
-            'You should inform at least "%d" arguments.',
+            self::MESSAGE_EXPECTED_AT_LEAST,
             $length
         );
 
@@ -67,10 +76,10 @@ class ArgumentCountError extends \ArgumentCountError implements ExceptionInterfa
      *
      * @return ArgumentCountError
      */
-    public static function forExpectedExactCount($length = 1, $code = 0, \Exception $previous = null)
+    public static function forExpectedExactAmount($length = 1, $code = 0, \Exception $previous = null)
     {
         $message = \sprintf(
-            'You should inform exactly "%d" arguments.',
+            self::MESSAGE_EXPECTED_EXACT_AMOUNT,
             $length
         );
 
