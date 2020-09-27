@@ -22,10 +22,13 @@ use CoiSA\Exception\ExceptionInterface;
  */
 class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
+    /** @const string */
+    const MESSAGE_INVALID_ARGUMENT_TYPE = 'Given argument "%s" should be of type "%s".';
+
     /**
      * {@inheritDoc}
      */
-    public static function create($message, $code = 0, \Exception $previous = null)
+    public static function create($message, $code = 0, \Throwable $previous = null)
     {
         $exceptionClass = \get_called_class();
 
@@ -43,7 +46,7 @@ class InvalidArgumentException extends \InvalidArgumentException implements Exce
     public static function forInvalidArgumentType($argumentName, $expectedType, $code = 0, $previous = null)
     {
         $message = \sprintf(
-            'Given argument "%s" should be of type "%s".',
+            self::MESSAGE_INVALID_ARGUMENT_TYPE,
             $argumentName,
             $expectedType
         );

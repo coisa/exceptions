@@ -27,6 +27,40 @@ abstract class AbstractExceptionTestCase extends TestCase
      */
     abstract public function getExceptionClass();
 
+    public function providePreviousException()
+    {
+        $message = \uniqid('previous message', true);
+        $code    = \mt_rand(1, 1000);
+        
+        return array(
+            array(new \Exception($message, $code)),
+            array(new Core\ArgumentCountError($message, $code)),
+            array(new Core\ArithmeticError($message, $code)),
+            array(new Core\AssertionError($message, $code)),
+            array(new Core\CompileError($message, $code)),
+            array(new Core\DivisionByZeroError($message, $code)),
+            array(new Core\Error($message, $code)),
+            array(new Core\Exception($message, $code)),
+            array(new Core\ParseError($message, $code)),
+            array(new Core\TypeError($message, $code)),
+            array(new Json\JsonException($message, $code)),
+            array(new Spl\BadFunctionCallException($message, $code)),
+            array(new Spl\BadMethodCallException($message, $code)),
+            array(new Spl\DomainException($message, $code)),
+            array(new Spl\InvalidArgumentException($message, $code)),
+            array(new Spl\LengthException($message, $code)),
+            array(new Spl\LogicException($message, $code)),
+            array(new Spl\OutOfBoundsException($message, $code)),
+            array(new Spl\OutOfRangeException($message, $code)),
+            array(new Spl\OverflowException($message, $code)),
+            array(new Spl\RangeException($message, $code)),
+            array(new Spl\ReflectionException($message, $code)),
+            array(new Spl\RuntimeException($message, $code)),
+            array(new Spl\UnderflowException($message, $code)),
+            array(new Spl\UnexpectedValueException($message, $code)),
+        );
+    }
+
     public function testExceptionImplementInterfaces()
     {
         $exceptionClass = $this->getExceptionClass();
@@ -37,20 +71,65 @@ abstract class AbstractExceptionTestCase extends TestCase
         self::assertInstanceOf('CoiSA\\Exception\\ExceptionInterface', $exception);
     }
 
-    public function testCreateWillReturnCustomException()
+    public function testCreateWillReturnInstanceOfSameException()
     {
         $exceptionClass = $this->getExceptionClass();
 
-        $message  = \uniqid('message', true);
-        $code     = \mt_rand(1, 1000);
-        $previous = new \Exception();
-
         /** @var \Throwable $exception */
-        $exception = $exceptionClass::create($message, $code, $previous);
+        $exception = $exceptionClass::create(\uniqid('message', true));
 
         self::assertInstanceOf($exceptionClass, $exception);
+    }
+
+    public function testCreateWillReturnExceptionWithGivenMessage()
+    {
+        $message = \uniqid('message', true);
+
+        $exceptionClass = $this->getExceptionClass();
+
+        /** @var \Throwable $exception */
+        $exception = $exceptionClass::create($message);
+
         self::assertEquals($message, $exception->getMessage());
+    }
+
+    public function testCreateWithoutCodeWillReturnExceptionWithZeroCode()
+    {
+        $exceptionClass = $this->getExceptionClass();
+
+        /** @var \Throwable $exception */
+        $exception = $exceptionClass::create(
+            \uniqid('message', true),
+            null
+        );
+
+        self::assertEquals(0, $exception->getCode());
+    }
+
+    public function testCreateWithCodeWillReturnExceptionWithGivenCode()
+    {
+        $message  = \uniqid('message', true);
+        $code     = \mt_rand(1, 1000);
+
+        $exceptionClass = $this->getExceptionClass();
+
+        /** @var \Throwable $exception */
+        $exception = $exceptionClass::create($message, $code);
+
         self::assertEquals($code, $exception->getCode());
+    }
+
+    /**
+     * @dataProvider providePreviousException
+     */
+    public function testCreateWithPreviousWillReturnExceptionWithGivenPrevious(\Throwable $previous)
+    {
+        $message        = \uniqid('message', true);
+        $exceptionClass = $this->getExceptionClass();
+
+        /** @var \Throwable $exception */
+        $exception = $exceptionClass::create($message, null, $previous);
+
         self::assertSame($previous, $exception->getPrevious());
     }
 }
