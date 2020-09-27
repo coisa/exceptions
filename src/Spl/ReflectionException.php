@@ -22,10 +22,16 @@ use CoiSA\Exception\ExceptionInterface;
  */
 class ReflectionException extends \ReflectionException implements ExceptionInterface
 {
+    /** @const string */
+    const MESSAGE_CLASS_NOT_FOUND = 'Class "%s" not found!';
+
+    /** @const string */
+    const MESSAGE_CLASS_NOT_SUBCLASS_OF = 'Given class "%s" are not a subclass of "%s".';
+
     /**
      * {@inheritDoc}
      */
-    public static function create($message, $code = 0, \Throwable $previous = null)
+    public static function create($message, $code = 0, $previous = null)
     {
         $exceptionClass = \get_called_class();
 
@@ -42,7 +48,7 @@ class ReflectionException extends \ReflectionException implements ExceptionInter
     public static function forClassNotFound($class, $code = 0, $previous = null)
     {
         $message = \sprintf(
-            'Class "%s" not found!',
+            self::MESSAGE_CLASS_NOT_FOUND,
             $class
         );
 
@@ -58,7 +64,7 @@ class ReflectionException extends \ReflectionException implements ExceptionInter
     public static function forClassNotSubclassOf($class, $subclass)
     {
         $message = \sprintf(
-            'Given class "%s" are not a subclass of "%s".',
+            self::MESSAGE_CLASS_NOT_SUBCLASS_OF,
             $class,
             $subclass
         );

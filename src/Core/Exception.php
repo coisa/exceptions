@@ -25,7 +25,7 @@ class Exception extends \Exception implements ExceptionInterface
     /**
      * {@inheritDoc}
      */
-    public static function create($message, $code = 0, \Throwable $previous = null)
+    public static function create($message, $code = 0, $previous = null)
     {
         $exceptionClass = \get_called_class();
 
