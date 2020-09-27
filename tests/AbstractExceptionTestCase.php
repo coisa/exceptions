@@ -31,7 +31,7 @@ abstract class AbstractExceptionTestCase extends TestCase
     {
         $message = \uniqid('previous message', true);
         $code    = \mt_rand(1, 1000);
-        
+
         return array(
             array(new \Exception($message, $code)),
             array(new Core\ArgumentCountError($message, $code)),
