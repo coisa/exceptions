@@ -122,7 +122,7 @@ abstract class AbstractExceptionTestCase extends TestCase
     /**
      * @dataProvider providePreviousException
      */
-    public function testCreateWithPreviousWillReturnExceptionWithGivenPrevious(\Throwable $previous)
+    public function testCreateWithPreviousWillReturnExceptionWithGivenPrevious($previous)
     {
         $message        = \uniqid('message', true);
         $exceptionClass = $this->getExceptionClass();
