@@ -59,7 +59,7 @@ class ArgumentCountError extends \ArgumentCountError implements ExceptionInterfa
      *
      * @return ArgumentCountError
      */
-    public static function forExpectedAtLeast($length = 1, $code = 0, \Exception $previous = null)
+    public static function forExpectedAtLeast($length = 1, $code = 0, $previous = null)
     {
         $message = \sprintf(
             self::MESSAGE_EXPECTED_AT_LEAST,
@@ -76,7 +76,7 @@ class ArgumentCountError extends \ArgumentCountError implements ExceptionInterfa
      *
      * @return ArgumentCountError
      */
-    public static function forExpectedExactAmount($length = 1, $code = 0, \Exception $previous = null)
+    public static function forExpectedExactAmount($length = 1, $code = 0, $previous = null)
     {
         $message = \sprintf(
             self::MESSAGE_EXPECTED_EXACT_AMOUNT,

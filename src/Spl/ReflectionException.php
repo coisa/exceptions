@@ -61,7 +61,7 @@ class ReflectionException extends \ReflectionException implements ExceptionInter
      *
      * @return \CoiSA\Factory\Exception\ReflectionException
      */
-    public static function forClassNotSubclassOf($class, $subclass)
+    public static function forClassNotSubclassOf($class, $subclass, $code = 0, $previous = null)
     {
         $message = \sprintf(
             self::MESSAGE_CLASS_NOT_SUBCLASS_OF,
@@ -69,6 +69,6 @@ class ReflectionException extends \ReflectionException implements ExceptionInter
             $subclass
         );
 
-        return self::create($message);
+        return self::create($message, $code, $previous);
     }
 }
