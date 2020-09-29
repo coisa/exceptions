@@ -29,4 +29,25 @@ final class ContainerExceptionTest extends AbstractExceptionTestCase
     {
         return __NAMESPACE__ . '\\ContainerException';
     }
+
+    public function testForExceptionResolvingIdentifierWillReturnContainerException()
+    {
+        $id       = \uniqid('id', true);
+        $code     = \mt_rand(1, 1000);
+        $previous = new \Exception(
+            \uniqid('message', true),
+            \mt_rand(1, 1000)
+        );
+
+        /** @var ContainerException $containerException */
+        $containerException = ContainerException::forExceptionResolvingIdentifier($previous, $id, $code);
+
+        self::assertInstanceOf(__NAMESPACE__ . '\\ContainerException', $containerException);
+        self::assertEquals(
+            \sprintf(ContainerException::MESSAGE_EXCEPTION_RESOLVING_IDENTIFIER, $previous->getMessage(), $id),
+            $containerException->getMessage()
+        );
+        self::assertEquals($code, $containerException->getCode());
+        self::assertSame($previous, $containerException->getPrevious());
+    }
 }

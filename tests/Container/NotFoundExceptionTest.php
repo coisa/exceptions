@@ -29,4 +29,25 @@ final class NotFoundExceptionTest extends AbstractExceptionTestCase
     {
         return __NAMESPACE__ . '\\NotFoundException';
     }
+
+    public function testForNotFoundIdentifierFactoryWillReturnNotFoundException()
+    {
+        $id       = \uniqid('id', true);
+        $code     = \mt_rand(1, 1000);
+        $previous = new \Exception(
+            \uniqid('message', true),
+            \mt_rand(1, 1000)
+        );
+
+        /** @var NotFoundException $notFoundException */
+        $notFoundException = NotFoundException::forNotFoundIdentifierFactory($id, $code, $previous);
+
+        self::assertInstanceOf(__NAMESPACE__ . '\\NotFoundException', $notFoundException);
+        self::assertEquals(
+            \sprintf(NotFoundException::MESSAGE_NOT_FOUND_IDENTIFIER_FACTORY, $id),
+            $notFoundException->getMessage()
+        );
+        self::assertEquals($code, $notFoundException->getCode());
+        self::assertSame($previous, $notFoundException->getPrevious());
+    }
 }

@@ -29,4 +29,47 @@ final class ReflectionExceptionTest extends AbstractExceptionTestCase
     {
         return __NAMESPACE__ . '\\ReflectionException';
     }
+
+    public function testForClassNotFoundWillReturnReflectionException()
+    {
+        $class    = \uniqid('class', true);
+        $code     = \mt_rand(1, 1000);
+        $previous = new \Exception(
+            \uniqid('message', true),
+            \mt_rand(1, 1000)
+        );
+
+        /** @var ReflectionException $reflectionException */
+        $reflectionException = ReflectionException::forClassNotFound($class, $code, $previous);
+
+        self::assertInstanceOf(__NAMESPACE__ . '\\ReflectionException', $reflectionException);
+        self::assertEquals(
+            \sprintf(ReflectionException::MESSAGE_CLASS_NOT_FOUND, $class),
+            $reflectionException->getMessage()
+        );
+        self::assertEquals($code, $reflectionException->getCode());
+        self::assertSame($previous, $reflectionException->getPrevious());
+    }
+
+    public function testForClassNotSubclassOfWillReturnReflectionException()
+    {
+        $class    = \uniqid('class', true);
+        $subclass = \uniqid('subclass', true);
+        $code     = \mt_rand(1, 1000);
+        $previous = new \Exception(
+            \uniqid('message', true),
+            \mt_rand(1, 1000)
+        );
+
+        /** @var ReflectionException $reflectionException */
+        $reflectionException = ReflectionException::forClassNotSubclassOf($class, $subclass, $code, $previous);
+
+        self::assertInstanceOf(__NAMESPACE__ . '\\ReflectionException', $reflectionException);
+        self::assertEquals(
+            \sprintf(ReflectionException::MESSAGE_CLASS_NOT_SUBCLASS_OF, $class, $subclass),
+            $reflectionException->getMessage()
+        );
+        self::assertEquals($code, $reflectionException->getCode());
+        self::assertSame($previous, $reflectionException->getPrevious());
+    }
 }
