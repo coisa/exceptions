@@ -56,8 +56,10 @@ class ReflectionException extends \ReflectionException implements ExceptionInter
     }
 
     /**
-     * @param string $class
-     * @param string $subclass
+     * @param string                     $class
+     * @param string                     $subclass
+     * @param int                        $code
+     * @param null|\Exception|\Throwable $previous
      *
      * @return \CoiSA\Factory\Exception\ReflectionException
      */

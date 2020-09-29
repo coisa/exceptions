@@ -34,6 +34,8 @@ abstract class AbstractExceptionTestCase extends TestCase
 
         return array(
             array(new \Exception($message, $code)),
+            array(new Container\ContainerException($message, $code)),
+            array(new Container\NotFoundException($message, $code)),
             array(new Core\ArgumentCountError($message, $code)),
             array(new Core\ArithmeticError($message, $code)),
             array(new Core\AssertionError($message, $code)),
@@ -121,6 +123,8 @@ abstract class AbstractExceptionTestCase extends TestCase
 
     /**
      * @dataProvider providePreviousException
+     *
+     * @param mixed $previous
      */
     public function testCreateWithPreviousWillReturnExceptionWithGivenPrevious($previous)
     {
