@@ -7,23 +7,23 @@
  * with this source code in the file LICENSE.
  *
  * @link      https://github.com/coisa/exceptions
+ *
  * @copyright Copyright (c) 2020 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
  * @license   https://opensource.org/licenses/MIT MIT License
  */
-
 namespace CoiSA\Exception\Spl;
 
 use CoiSA\Exception\ExceptionInterface;
 
 /**
- * Class UnexpectedValueException
+ * Class UnexpectedValueException.
  *
  * @package CoiSA\Exception\Spl
  */
 class UnexpectedValueException extends \UnexpectedValueException implements ExceptionInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function create($message, $code = 0, $previous = null)
     {

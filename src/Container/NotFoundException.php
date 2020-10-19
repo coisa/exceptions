@@ -7,16 +7,16 @@
  * with this source code in the file LICENSE.
  *
  * @link      https://github.com/coisa/exceptions
+ *
  * @copyright Copyright (c) 2020 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
  * @license   https://opensource.org/licenses/MIT MIT License
  */
-
 namespace CoiSA\Exception\Container;
 
 use Psr\Container\NotFoundExceptionInterface;
 
 /**
- * Class NotFoundException
+ * Class NotFoundException.
  *
  * @package CoiSA\Exception\Container
  */
@@ -28,7 +28,7 @@ class NotFoundException extends ContainerException implements NotFoundExceptionI
     const MESSAGE_NOT_FOUND_IDENTIFIER_FACTORY = 'No entry was found for "%s" identifier.';
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function create($message, $code = 0, $previous = null)
     {

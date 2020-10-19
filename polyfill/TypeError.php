@@ -7,10 +7,10 @@
  * with this source code in the file LICENSE.
  *
  * @link      https://github.com/coisa/exceptions
+ *
  * @copyright Copyright (c) 2020 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
  * @license   https://opensource.org/licenses/MIT MIT License
  */
-
 namespace {
     if (false === \class_exists('TypeError')) {
         /**
@@ -20,7 +20,7 @@ namespace {
          * function return type. The third is where an invalid number of arguments are passed to a built-in PHP function
          * (strict mode only).
          *
-         * @link http://php.net/manual/en/class.typeerror.php
+         * @see http://php.net/manual/en/class.typeerror.php
          * @since 7.0
          */
         class TypeError extends Error

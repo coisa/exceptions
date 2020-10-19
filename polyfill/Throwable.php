@@ -7,25 +7,25 @@
  * with this source code in the file LICENSE.
  *
  * @link      https://github.com/coisa/exceptions
+ *
  * @copyright Copyright (c) 2020 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
  * @license   https://opensource.org/licenses/MIT MIT License
  */
-
 namespace {
     if (false === \interface_exists('\Throwable')) {
         /**
          * Throwable is the base interface for any object that can be thrown via a throw statement in PHP 7,
          * including Error and Exception.
          *
-         * @link  http://php.net/manual/en/class.throwable.php
+         * @see  http://php.net/manual/en/class.throwable.php
          * @since 7.0
          */
         interface Throwable
         {
             /**
-             * Gets a string representation of the thrown object
+             * Gets a string representation of the thrown object.
              *
-             * @link  http://php.net/manual/en/throwable.tostring.php
+             * @see  http://php.net/manual/en/throwable.tostring.php
              *
              * @return string <p>Returns the string representation of the thrown object.</p>
              *
@@ -34,9 +34,9 @@ namespace {
             public function __toString();
 
             /**
-             * Gets the message
+             * Gets the message.
              *
-             * @link  http://php.net/manual/en/throwable.getmessage.php
+             * @see  http://php.net/manual/en/throwable.getmessage.php
              *
              * @return string
              *
@@ -45,9 +45,9 @@ namespace {
             public function getMessage();
 
             /**
-             * Gets the exception code
+             * Gets the exception code.
              *
-             * @link  http://php.net/manual/en/throwable.getcode.php
+             * @see  http://php.net/manual/en/throwable.getcode.php
              *
              * @return int <p>
              *             Returns the exception code as integer in
@@ -61,9 +61,9 @@ namespace {
             public function getCode();
 
             /**
-             * Gets the file in which the exception occurred
+             * Gets the file in which the exception occurred.
              *
-             * @link  http://php.net/manual/en/throwable.getfile.php
+             * @see  http://php.net/manual/en/throwable.getfile.php
              *
              * @return string returns the name of the file from which the object was thrown
              *
@@ -72,9 +72,9 @@ namespace {
             public function getFile();
 
             /**
-             * Gets the line on which the object was instantiated
+             * Gets the line on which the object was instantiated.
              *
-             * @link  http://php.net/manual/en/throwable.getline.php
+             * @see  http://php.net/manual/en/throwable.getline.php
              *
              * @return int returns the line number where the thrown object was instantiated
              *
@@ -83,9 +83,9 @@ namespace {
             public function getLine();
 
             /**
-             * Gets the stack trace
+             * Gets the stack trace.
              *
-             * @link  http://php.net/manual/en/throwable.gettrace.php
+             * @see  http://php.net/manual/en/throwable.gettrace.php
              *
              * @return array <p>
              *               Returns the stack trace as an array in the same format as
@@ -97,9 +97,9 @@ namespace {
             public function getTrace();
 
             /**
-             * Gets the stack trace as a string
+             * Gets the stack trace as a string.
              *
-             * @link  http://php.net/manual/en/throwable.gettraceasstring.php
+             * @see  http://php.net/manual/en/throwable.gettraceasstring.php
              *
              * @return string returns the stack trace as a string
              *
@@ -108,9 +108,9 @@ namespace {
             public function getTraceAsString();
 
             /**
-             * Returns the previous Throwable
+             * Returns the previous Throwable.
              *
-             * @link  http://php.net/manual/en/throwable.getprevious.php
+             * @see  http://php.net/manual/en/throwable.getprevious.php
              *
              * @return Throwable returns the previous {@see Throwable} if available, or <b>NULL</b> otherwise
              *

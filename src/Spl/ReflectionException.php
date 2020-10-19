@@ -7,16 +7,16 @@
  * with this source code in the file LICENSE.
  *
  * @link      https://github.com/coisa/exceptions
+ *
  * @copyright Copyright (c) 2020 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
  * @license   https://opensource.org/licenses/MIT MIT License
  */
-
 namespace CoiSA\Exception\Spl;
 
 use CoiSA\Exception\ExceptionInterface;
 
 /**
- * Class ReflectionException
+ * Class ReflectionException.
  *
  * @package CoiSA\Exception\Spl
  */
@@ -29,7 +29,7 @@ class ReflectionException extends \ReflectionException implements ExceptionInter
     const MESSAGE_CLASS_NOT_SUBCLASS_OF = 'Given class "%s" are not a subclass of "%s".';
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function create($message, $code = 0, $previous = null)
     {

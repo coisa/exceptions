@@ -7,16 +7,16 @@
  * with this source code in the file LICENSE.
  *
  * @link      https://github.com/coisa/exceptions
+ *
  * @copyright Copyright (c) 2020 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
  * @license   https://opensource.org/licenses/MIT MIT License
  */
-
 namespace CoiSA\Exception\Core;
 
 use CoiSA\Exception\ExceptionInterface;
 
 /**
- * Class ArgumentCountError
+ * Class ArgumentCountError.
  *
  * @package CoiSA\Exception\Core
  */
@@ -32,7 +32,7 @@ class ArgumentCountError extends \ArgumentCountError implements ExceptionInterfa
     const MESSAGE_EXPECTED_EXACT_AMOUNT = 'You should inform exactly "%d" arguments.';
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function create($message, $code = 0, $previous = null)
     {
