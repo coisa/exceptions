@@ -13,17 +13,12 @@ declare(strict_types=1);
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
-namespace CoiSA\Exception\Core;
+namespace CoiSA\Exception;
 
-use CoiSA\Exception\ExceptionInterface;
-use CoiSA\Exception\ExceptionTrait;
-
-/**
- * Class Error.
- *
- * @package CoiSA\Exception\Core
- */
-class Error extends \Error implements ExceptionInterface
+trait ExceptionTrait
 {
-    use ExceptionTrait;
+    public static function create(string $message, int $code = 0, \Throwable $previous = null): ExceptionInterface
+    {
+        return new self($message, $code, $previous);
+    }
 }

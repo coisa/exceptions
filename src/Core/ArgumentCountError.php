@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace CoiSA\Exception\Core;
 
 use CoiSA\Exception\ExceptionInterface;
+use CoiSA\Exception\ExceptionTrait;
 
 /**
  * Class ArgumentCountError.
@@ -24,6 +25,8 @@ use CoiSA\Exception\ExceptionInterface;
  */
 class ArgumentCountError extends \ArgumentCountError implements ExceptionInterface
 {
+    use ExceptionTrait;
+
     /** @const string */
     public const MESSAGE_EXPECTED_NO_ARGUMENT = 'This closure do not expect any argument.';
 
@@ -32,14 +35,6 @@ class ArgumentCountError extends \ArgumentCountError implements ExceptionInterfa
 
     /** @const string */
     public const MESSAGE_EXPECTED_EXACT_AMOUNT = 'You should inform exactly "%d" arguments.';
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function create(string $message, int $code = 0, \Throwable $previous = null): self
-    {
-        return new self($message, $code, $previous);
-    }
 
     public static function forExpectedNoArgument(int $code = 0, \Throwable $previous = null): self
     {

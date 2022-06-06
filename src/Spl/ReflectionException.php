@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace CoiSA\Exception\Spl;
 
 use CoiSA\Exception\ExceptionInterface;
+use CoiSA\Exception\ExceptionTrait;
 
 /**
  * Class ReflectionException.
@@ -24,19 +25,13 @@ use CoiSA\Exception\ExceptionInterface;
  */
 class ReflectionException extends \ReflectionException implements ExceptionInterface
 {
+    use ExceptionTrait;
+
     /** @const string */
     public const MESSAGE_CLASS_NOT_FOUND = 'Class "%s" not found!';
 
     /** @const string */
     public const MESSAGE_CLASS_NOT_SUBCLASS_OF = 'Given class "%s" are not a subclass of "%s".';
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function create(string $message, int $code = 0, \Throwable $previous = null): self
-    {
-        return new self($message, $code, $previous);
-    }
 
     public static function forClassNotFound(string $class, int $code = 0, \Throwable $previous = null): self
     {

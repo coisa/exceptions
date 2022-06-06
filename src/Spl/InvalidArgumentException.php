@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace CoiSA\Exception\Spl;
 
 use CoiSA\Exception\ExceptionInterface;
+use CoiSA\Exception\ExceptionTrait;
 
 /**
  * Class InvalidArgumentException.
@@ -24,16 +25,10 @@ use CoiSA\Exception\ExceptionInterface;
  */
 class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
+    use ExceptionTrait;
+
     /** @const string */
     public const MESSAGE_INVALID_ARGUMENT_TYPE = 'Given argument "%s" should be of type "%s".';
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function create(string $message, int $code = 0, \Throwable $previous = null): self
-    {
-        return new self($message, $code, $previous);
-    }
 
     public static function forInvalidArgumentType(
         string $argumentName,

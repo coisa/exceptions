@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace CoiSA\Exception\Container;
 
 use CoiSA\Exception\ExceptionInterface;
+use CoiSA\Exception\ExceptionTrait;
 use Psr\Container\ContainerExceptionInterface;
 
 /**
@@ -25,18 +26,12 @@ use Psr\Container\ContainerExceptionInterface;
  */
 class ContainerException extends \Exception implements ExceptionInterface, ContainerExceptionInterface
 {
+    use ExceptionTrait;
+
     /**
      * @const string
      */
     public const MESSAGE_EXCEPTION_RESOLVING_IDENTIFIER = 'Error message "%s" while retrieving the entry "%s".';
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function create(string $message, int $code = 0, \Throwable $previous = null): self
-    {
-        return new self($message, $code, $previous);
-    }
 
     public static function forExceptionResolvingIdentifier(\Throwable $exception, string $id, int $code = 0): self
     {

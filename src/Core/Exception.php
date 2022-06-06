@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace CoiSA\Exception\Core;
 
 use CoiSA\Exception\ExceptionInterface;
+use CoiSA\Exception\ExceptionTrait;
 
 /**
  * Class Error.
@@ -24,11 +25,5 @@ use CoiSA\Exception\ExceptionInterface;
  */
 class Exception extends \Exception implements ExceptionInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function create(string $message, int $code = 0, \Throwable $previous = null): self
-    {
-        return new self($message, $code, $previous);
-    }
+    use ExceptionTrait;
 }

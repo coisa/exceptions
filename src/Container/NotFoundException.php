@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 namespace CoiSA\Exception\Container;
 
+use CoiSA\Exception\ExceptionTrait;
 use Psr\Container\NotFoundExceptionInterface;
 
 /**
@@ -24,18 +25,12 @@ use Psr\Container\NotFoundExceptionInterface;
  */
 class NotFoundException extends ContainerException implements NotFoundExceptionInterface
 {
+    use ExceptionTrait;
+
     /**
      * @const string
      */
     public const MESSAGE_NOT_FOUND_IDENTIFIER_FACTORY = 'No entry was found for "%s" identifier.';
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function create(string $message, int $code = 0, \Throwable $previous = null): self
-    {
-        return new self($message, $code, $previous);
-    }
 
     public static function forNotFoundIdentifierFactory(string $id, int $code = 0, \Throwable $previous = null): self
     {
