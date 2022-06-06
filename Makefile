@@ -20,6 +20,6 @@ cs-fix: install
 
 .PHONY: tests
 tests: cs-fix
-	docker-compose run --rm --user $(UID):$(GID) php74 test
+	docker-compose run --rm --user $(UID):$(GID) php74 check
 	docker-compose run --rm php80 test
 	docker-compose run --rm php81 test

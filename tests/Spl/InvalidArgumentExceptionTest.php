@@ -32,7 +32,7 @@ final class InvalidArgumentExceptionTest extends AbstractExceptionTestCase
         return InvalidArgumentException::class;
     }
 
-    public function testForInvalidArgumentTypeWillReturnInvalidArgumentExceptionWithArgumentNameAndExpectedTypeOnMessage(): void
+    public function testForInvalidArgumentTypeWillReturnInvalidArgumentExceptionWithArgumentsOnMessage(): void
     {
         $argumentName = uniqid('argumentName', true);
         $expectedType = uniqid('expectedType', true);
