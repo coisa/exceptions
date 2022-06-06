@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of coisa/exceptions.
  *
@@ -7,13 +9,14 @@
  * with this source code in the file LICENSE.
  *
  * @link      https://github.com/coisa/exceptions
- *
- * @copyright Copyright (c) 2020 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
+ * @copyright Copyright (c) 2020-2022 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
  * @license   https://opensource.org/licenses/MIT MIT License
  */
+
 namespace CoiSA\Exception\Spl;
 
 use CoiSA\Exception\ExceptionInterface;
+use CoiSA\Exception\ExceptionTrait;
 
 /**
  * Class ReflectionException.
@@ -22,32 +25,17 @@ use CoiSA\Exception\ExceptionInterface;
  */
 class ReflectionException extends \ReflectionException implements ExceptionInterface
 {
-    /** @const string */
-    const MESSAGE_CLASS_NOT_FOUND = 'Class "%s" not found!';
+    use ExceptionTrait;
 
     /** @const string */
-    const MESSAGE_CLASS_NOT_SUBCLASS_OF = 'Given class "%s" are not a subclass of "%s".';
+    public const MESSAGE_CLASS_NOT_FOUND = 'Class "%s" not found!';
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function create($message, $code = 0, $previous = null)
+    /** @const string */
+    public const MESSAGE_CLASS_NOT_SUBCLASS_OF = 'Given class "%s" are not a subclass of "%s".';
+
+    public static function forClassNotFound(string $class, int $code = 0, \Throwable $previous = null): self
     {
-        $exceptionClass = \get_called_class();
-
-        return new $exceptionClass($message, $code, $previous);
-    }
-
-    /**
-     * @param string                     $class
-     * @param int                        $code
-     * @param null|\Exception|\Throwable $previous
-     *
-     * @return UnexpectedValueException
-     */
-    public static function forClassNotFound($class, $code = 0, $previous = null)
-    {
-        $message = \sprintf(
+        $message = sprintf(
             self::MESSAGE_CLASS_NOT_FOUND,
             $class
         );
@@ -55,17 +43,13 @@ class ReflectionException extends \ReflectionException implements ExceptionInter
         return self::create($message, $code, $previous);
     }
 
-    /**
-     * @param string                     $class
-     * @param string                     $subclass
-     * @param int                        $code
-     * @param null|\Exception|\Throwable $previous
-     *
-     * @return \CoiSA\Factory\Exception\ReflectionException
-     */
-    public static function forClassNotSubclassOf($class, $subclass, $code = 0, $previous = null)
-    {
-        $message = \sprintf(
+    public static function forClassNotSubclassOf(
+        string $class,
+        string $subclass,
+        int $code = 0,
+        \Throwable $previous = null
+    ): self {
+        $message = sprintf(
             self::MESSAGE_CLASS_NOT_SUBCLASS_OF,
             $class,
             $subclass

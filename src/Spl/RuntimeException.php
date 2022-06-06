@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of coisa/exceptions.
  *
@@ -7,13 +9,14 @@
  * with this source code in the file LICENSE.
  *
  * @link      https://github.com/coisa/exceptions
- *
- * @copyright Copyright (c) 2020 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
+ * @copyright Copyright (c) 2020-2022 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
  * @license   https://opensource.org/licenses/MIT MIT License
  */
+
 namespace CoiSA\Exception\Spl;
 
 use CoiSA\Exception\ExceptionInterface;
+use CoiSA\Exception\ExceptionTrait;
 
 /**
  * Class RuntimeException.
@@ -22,13 +25,5 @@ use CoiSA\Exception\ExceptionInterface;
  */
 class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function create($message, $code = 0, $previous = null)
-    {
-        $exceptionClass = \get_called_class();
-
-        return new $exceptionClass($message, $code, $previous);
-    }
+    use ExceptionTrait;
 }

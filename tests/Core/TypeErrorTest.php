@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of coisa/exceptions.
  *
@@ -7,10 +9,10 @@
  * with this source code in the file LICENSE.
  *
  * @link      https://github.com/coisa/exceptions
- *
- * @copyright Copyright (c) 2020 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
+ * @copyright Copyright (c) 2020-2022 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
  * @license   https://opensource.org/licenses/MIT MIT License
  */
+
 namespace CoiSA\Exception\Core;
 
 use CoiSA\Exception\AbstractExceptionTestCase;
@@ -19,14 +21,14 @@ use CoiSA\Exception\AbstractExceptionTestCase;
  * Class TypeErrorTest.
  *
  * @package CoiSA\Exception\Core
+ *
+ * @internal
+ * @coversDefaultClass \CoiSA\Exception\Core\TypeError
  */
 final class TypeErrorTest extends AbstractExceptionTestCase
 {
-    /**
-     * @return string
-     */
-    public function getExceptionClass()
+    public function getExceptionClass(): string
     {
-        return __NAMESPACE__ . '\\TypeError';
+        return TypeError::class;
     }
 }

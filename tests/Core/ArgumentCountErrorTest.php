@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of coisa/exceptions.
  *
@@ -7,10 +9,10 @@
  * with this source code in the file LICENSE.
  *
  * @link      https://github.com/coisa/exceptions
- *
- * @copyright Copyright (c) 2020 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
+ * @copyright Copyright (c) 2020-2022 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
  * @license   https://opensource.org/licenses/MIT MIT License
  */
+
 namespace CoiSA\Exception\Core;
 
 use CoiSA\Exception\AbstractExceptionTestCase;
@@ -19,78 +21,87 @@ use CoiSA\Exception\AbstractExceptionTestCase;
  * Class ArgumentCountErrorTest.
  *
  * @package CoiSA\Exception\Core
+ *
+ * @internal
+ * @coversDefaultClass \CoiSA\Exception\Core\ArgumentCountError
  */
 final class ArgumentCountErrorTest extends AbstractExceptionTestCase
 {
-    /**
-     * @return string
-     */
-    public function getExceptionClass()
+    public function getExceptionClass(): string
     {
-        return __NAMESPACE__ . '\\ArgumentCountError';
+        return ArgumentCountError::class;
     }
 
-    public function testForExpectedNoArgumentWillReturnArgumentCountError()
+    /**
+     * @covers ::forExpectedNoArgument
+     */
+    public function testForExpectedNoArgumentWillReturnArgumentCountError(): void
     {
-        $code     = \mt_rand(1, 1000);
+        $code     = random_int(1, 1000);
         $previous = new \Exception(
-            \uniqid('message', true),
-            \mt_rand(1, 1000)
+            uniqid('message', true),
+            random_int(1, 1000)
         );
 
         /** @var ArgumentCountError $argumentCountError */
         $argumentCountError = ArgumentCountError::forExpectedNoArgument($code, $previous);
 
-        self::assertInstanceOf(__NAMESPACE__ . '\\ArgumentCountError', $argumentCountError);
-        self::assertEquals(
+        parent::assertInstanceOf(ArgumentCountError::class, $argumentCountError);
+        parent::assertSame(
             ArgumentCountError::MESSAGE_EXPECTED_NO_ARGUMENT,
             $argumentCountError->getMessage()
         );
-        self::assertEquals($code, $argumentCountError->getCode());
-        self::assertSame($previous, $argumentCountError->getPrevious());
+        parent::assertSame($code, $argumentCountError->getCode());
+        parent::assertSame($previous, $argumentCountError->getPrevious());
     }
 
-    public function testForExpectedAtLeastWithLengthWillReturnArgumentCountErrorWithLengthOnMessage()
+    /**
+     * @covers ::forExpectedAtLeast
+     */
+    public function testForExpectedAtLeastWithLengthWillReturnArgumentCountErrorWithLengthOnMessage(): void
     {
-        $length          = \mt_rand(1, 1000);
-        $expectedMessage = \sprintf(ArgumentCountError::MESSAGE_EXPECTED_AT_LEAST, $length);
-        $code            = \mt_rand(1, 1000);
+        $length          = random_int(1, 1000);
+        $expectedMessage = sprintf(ArgumentCountError::MESSAGE_EXPECTED_AT_LEAST, $length);
+        $code            = random_int(1, 1000);
         $previous        = new \Exception(
-            \uniqid('message', true),
-            \mt_rand(1, 1000)
+            uniqid('message', true),
+            random_int(1, 1000)
         );
 
         /** @var ArgumentCountError $argumentCountError */
         $argumentCountError = ArgumentCountError::forExpectedAtLeast($length, $code, $previous);
 
-        self::assertInstanceOf(__NAMESPACE__ . '\\ArgumentCountError', $argumentCountError);
-        self::assertEquals(
+        parent::assertInstanceOf(ArgumentCountError::class, $argumentCountError);
+        parent::assertSame(
             $expectedMessage,
             $argumentCountError->getMessage()
         );
-        self::assertEquals($code, $argumentCountError->getCode());
-        self::assertSame($previous, $argumentCountError->getPrevious());
+        parent::assertSame($code, $argumentCountError->getCode());
+        parent::assertSame($previous, $argumentCountError->getPrevious());
     }
 
-    public function testForExpectedExactAmountWithLengthWillReturnArgumentCountErrorWithLengthOnMessage()
+    /**
+     * @covers ::forExpectedExactAmount
+     */
+    public function testForExpectedExactAmountWithLengthWillReturnArgumentCountErrorWithLengthOnMessage(): void
     {
-        $length          = \mt_rand(1, 1000);
-        $expectedMessage = \sprintf(ArgumentCountError::MESSAGE_EXPECTED_EXACT_AMOUNT, $length);
-        $code            = \mt_rand(1, 1000);
+        $length          = random_int(1, 1000);
+        $expectedMessage = sprintf(ArgumentCountError::MESSAGE_EXPECTED_EXACT_AMOUNT, $length);
+        $code            = random_int(1, 1000);
         $previous        = new \Exception(
-            \uniqid('message', true),
-            \mt_rand(1, 1000)
+            uniqid('message', true),
+            random_int(1, 1000)
         );
 
         /** @var ArgumentCountError $argumentCountError */
         $argumentCountError = ArgumentCountError::forExpectedExactAmount($length, $code, $previous);
 
-        self::assertInstanceOf(__NAMESPACE__ . '\\ArgumentCountError', $argumentCountError);
-        self::assertEquals(
+        parent::assertInstanceOf(ArgumentCountError::class, $argumentCountError);
+        parent::assertSame(
             $expectedMessage,
             $argumentCountError->getMessage()
         );
-        self::assertEquals($code, $argumentCountError->getCode());
-        self::assertSame($previous, $argumentCountError->getPrevious());
+        parent::assertSame($code, $argumentCountError->getCode());
+        parent::assertSame($previous, $argumentCountError->getPrevious());
     }
 }

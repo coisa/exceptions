@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of coisa/exceptions.
  *
@@ -7,12 +9,13 @@
  * with this source code in the file LICENSE.
  *
  * @link      https://github.com/coisa/exceptions
- *
- * @copyright Copyright (c) 2020 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
+ * @copyright Copyright (c) 2020-2022 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
  * @license   https://opensource.org/licenses/MIT MIT License
  */
+
 namespace CoiSA\Exception\Container;
 
+use CoiSA\Exception\ExceptionTrait;
 use Psr\Container\NotFoundExceptionInterface;
 
 /**
@@ -22,31 +25,16 @@ use Psr\Container\NotFoundExceptionInterface;
  */
 class NotFoundException extends ContainerException implements NotFoundExceptionInterface
 {
+    use ExceptionTrait;
+
     /**
      * @const string
      */
-    const MESSAGE_NOT_FOUND_IDENTIFIER_FACTORY = 'No entry was found for "%s" identifier.';
+    public const MESSAGE_NOT_FOUND_IDENTIFIER_FACTORY = 'No entry was found for "%s" identifier.';
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function create($message, $code = 0, $previous = null)
+    public static function forNotFoundIdentifierFactory(string $id, int $code = 0, \Throwable $previous = null): self
     {
-        $exceptionClass = \get_called_class();
-
-        return new $exceptionClass($message, $code, $previous);
-    }
-
-    /**
-     * @param string                     $id
-     * @param int                        $code
-     * @param null|\Exception|\Throwable $previous
-     *
-     * @return NotFoundException
-     */
-    public static function forNotFoundIdentifierFactory($id, $code = 0, $previous = null)
-    {
-        $message = \sprintf(
+        $message = sprintf(
             self::MESSAGE_NOT_FOUND_IDENTIFIER_FACTORY,
             $id
         );

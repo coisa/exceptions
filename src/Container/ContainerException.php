@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of coisa/exceptions.
  *
@@ -7,13 +9,14 @@
  * with this source code in the file LICENSE.
  *
  * @link      https://github.com/coisa/exceptions
- *
- * @copyright Copyright (c) 2020 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
+ * @copyright Copyright (c) 2020-2022 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
  * @license   https://opensource.org/licenses/MIT MIT License
  */
+
 namespace CoiSA\Exception\Container;
 
 use CoiSA\Exception\ExceptionInterface;
+use CoiSA\Exception\ExceptionTrait;
 use Psr\Container\ContainerExceptionInterface;
 
 /**
@@ -23,31 +26,16 @@ use Psr\Container\ContainerExceptionInterface;
  */
 class ContainerException extends \Exception implements ExceptionInterface, ContainerExceptionInterface
 {
+    use ExceptionTrait;
+
     /**
      * @const string
      */
-    const MESSAGE_EXCEPTION_RESOLVING_IDENTIFIER = 'Error message "%s" while retrieving the entry "%s".';
+    public const MESSAGE_EXCEPTION_RESOLVING_IDENTIFIER = 'Error message "%s" while retrieving the entry "%s".';
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function create($message, $code = 0, $previous = null)
+    public static function forExceptionResolvingIdentifier(\Throwable $exception, string $id, int $code = 0): self
     {
-        $exceptionClass = \get_called_class();
-
-        return new $exceptionClass($message, $code, $previous);
-    }
-
-    /**
-     * @param \Exception|\Throwable $exception
-     * @param string                $id
-     * @param int                   $code
-     *
-     * @return ContainerException
-     */
-    public static function forExceptionResolvingIdentifier($exception, $id, $code = 0)
-    {
-        $message = \sprintf(
+        $message = sprintf(
             self::MESSAGE_EXCEPTION_RESOLVING_IDENTIFIER,
             $exception->getMessage(),
             $id

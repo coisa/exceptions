@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of coisa/exceptions.
  *
@@ -7,10 +9,10 @@
  * with this source code in the file LICENSE.
  *
  * @link      https://github.com/coisa/exceptions
- *
- * @copyright Copyright (c) 2020 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
+ * @copyright Copyright (c) 2020-2022 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
  * @license   https://opensource.org/licenses/MIT MIT License
  */
+
 namespace CoiSA\Exception\Spl;
 
 use CoiSA\Exception\AbstractExceptionTestCase;
@@ -19,31 +21,31 @@ use CoiSA\Exception\AbstractExceptionTestCase;
  * Class InvalidArgumentExceptionTest.
  *
  * @package CoiSA\Exception\Spl
+ *
+ * @internal
+ * @coversDefaultClass \CoiSA\Exception\Spl\InvalidArgumentException
  */
 final class InvalidArgumentExceptionTest extends AbstractExceptionTestCase
 {
-    /**
-     * @return string
-     */
-    public function getExceptionClass()
+    public function getExceptionClass(): string
     {
-        return __NAMESPACE__ . '\\InvalidArgumentException';
+        return InvalidArgumentException::class;
     }
 
-    public function testForInvalidArgumentTypeWillReturnInvalidArgumentExceptionWithArgumentNameAndExpectedTypeOnMessage()
+    public function testForInvalidArgumentTypeWillReturnInvalidArgumentExceptionWithArgumentsOnMessage(): void
     {
-        $argumentName = \uniqid('argumentName', true);
-        $expectedType = \uniqid('expectedType', true);
+        $argumentName = uniqid('argumentName', true);
+        $expectedType = uniqid('expectedType', true);
 
-        $expectedMessage = \sprintf(
+        $expectedMessage = sprintf(
             InvalidArgumentException::MESSAGE_INVALID_ARGUMENT_TYPE,
             $argumentName,
             $expectedType
         );
-        $code            = \mt_rand(1, 1000);
+        $code            = random_int(1, 1000);
         $previous        = new \Exception(
-            \uniqid('message', true),
-            \mt_rand(1, 1000)
+            uniqid('message', true),
+            random_int(1, 1000)
         );
 
         /** @var InvalidArgumentException $invalidArgumentException */
@@ -54,12 +56,12 @@ final class InvalidArgumentExceptionTest extends AbstractExceptionTestCase
             $previous
         );
 
-        self::assertInstanceOf(__NAMESPACE__ . '\\InvalidArgumentException', $invalidArgumentException);
-        self::assertEquals(
+        parent::assertInstanceOf(InvalidArgumentException::class, $invalidArgumentException);
+        parent::assertSame(
             $expectedMessage,
             $invalidArgumentException->getMessage()
         );
-        self::assertEquals($code, $invalidArgumentException->getCode());
-        self::assertSame($previous, $invalidArgumentException->getPrevious());
+        parent::assertSame($code, $invalidArgumentException->getCode());
+        parent::assertSame($previous, $invalidArgumentException->getPrevious());
     }
 }
