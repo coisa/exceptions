@@ -23,7 +23,7 @@ use CoiSA\Exception\AbstractExceptionTestCase;
  * @package CoiSA\Exception\Json
  *
  * @internal
- * @coversNothing
+ * @coversDefaultClass \CoiSA\Exception\Json\JsonException
  */
 final class JsonExceptionTest extends AbstractExceptionTestCase
 {

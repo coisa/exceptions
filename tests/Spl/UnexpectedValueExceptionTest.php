@@ -23,7 +23,7 @@ use CoiSA\Exception\AbstractExceptionTestCase;
  * @package CoiSA\Exception\Spl
  *
  * @internal
- * @coversNothing
+ * @coversDefaultClass \CoiSA\Exception\Spl\UnexpectedValueException
  */
 final class UnexpectedValueExceptionTest extends AbstractExceptionTestCase
 {

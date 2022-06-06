@@ -23,7 +23,7 @@ use CoiSA\Exception\AbstractExceptionTestCase;
  * @package CoiSA\Exception\Core
  *
  * @internal
- * @coversNothing
+ * @coversDefaultClass \CoiSA\Exception\Core\CompileError
  */
 final class CompileErrorTest extends AbstractExceptionTestCase
 {

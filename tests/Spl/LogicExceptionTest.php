@@ -23,7 +23,7 @@ use CoiSA\Exception\AbstractExceptionTestCase;
  * @package CoiSA\Exception\Spl
  *
  * @internal
- * @coversNothing
+ * @coversDefaultClass \CoiSA\Exception\Spl\LogicException
  */
 final class LogicExceptionTest extends AbstractExceptionTestCase
 {

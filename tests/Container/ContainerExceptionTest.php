@@ -23,7 +23,7 @@ use CoiSA\Exception\AbstractExceptionTestCase;
  * @package CoiSA\Exception\Container
  *
  * @internal
- * @coversNothing
+ * @coversDefaultClass \CoiSA\Exception\Container\ContainerException
  */
 final class ContainerExceptionTest extends AbstractExceptionTestCase
 {
@@ -32,6 +32,9 @@ final class ContainerExceptionTest extends AbstractExceptionTestCase
         return ContainerException::class;
     }
 
+    /**
+     * @covers ::forExceptionResolvingIdentifier
+     */
     public function testForExceptionResolvingIdentifierWillReturnContainerException(): void
     {
         $id       = uniqid('id', true);

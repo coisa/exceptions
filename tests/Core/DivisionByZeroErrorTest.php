@@ -23,7 +23,7 @@ use CoiSA\Exception\AbstractExceptionTestCase;
  * @package CoiSA\Exception\Core
  *
  * @internal
- * @coversNothing
+ * @coversDefaultClass \CoiSA\Exception\Core\DivisionByZeroError
  */
 final class DivisionByZeroErrorTest extends AbstractExceptionTestCase
 {

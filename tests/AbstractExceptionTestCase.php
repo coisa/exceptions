@@ -62,6 +62,9 @@ abstract class AbstractExceptionTestCase extends TestCase
         ];
     }
 
+    /**
+     * @coversNothing
+     */
     public function testExceptionImplementInterfaces(): void
     {
         $exceptionClass = $this->getExceptionClass();
@@ -72,6 +75,9 @@ abstract class AbstractExceptionTestCase extends TestCase
         parent::assertInstanceOf(ExceptionInterface::class, $exception);
     }
 
+    /**
+     * @covers ::create
+     */
     public function testCreateWillReturnInstanceOfSameException(): void
     {
         $exceptionClass = $this->getExceptionClass();
@@ -82,6 +88,9 @@ abstract class AbstractExceptionTestCase extends TestCase
         parent::assertInstanceOf($exceptionClass, $exception);
     }
 
+    /**
+     * @covers ::create
+     */
     public function testCreateWillReturnExceptionWithGivenMessage(): void
     {
         $message = uniqid('message', true);
@@ -94,6 +103,9 @@ abstract class AbstractExceptionTestCase extends TestCase
         parent::assertSame($message, $exception->getMessage());
     }
 
+    /**
+     * @covers ::create
+     */
     public function testCreateWithoutCodeWillReturnExceptionWithZeroCode(): void
     {
         $exceptionClass = $this->getExceptionClass();
@@ -104,6 +116,9 @@ abstract class AbstractExceptionTestCase extends TestCase
         parent::assertSame(0, $exception->getCode());
     }
 
+    /**
+     * @covers ::create
+     */
     public function testCreateWithCodeWillReturnExceptionWithGivenCode(): void
     {
         $message  = uniqid('message', true);
@@ -119,16 +134,15 @@ abstract class AbstractExceptionTestCase extends TestCase
 
     /**
      * @dataProvider providePreviousException
-     *
-     * @param mixed $previous
+     * @covers ::create
      */
-    public function testCreateWithPreviousWillReturnExceptionWithGivenPrevious($previous): void
+    public function testCreateWithPreviousWillReturnExceptionWithGivenPrevious(\Throwable $previous): void
     {
         $message        = uniqid('message', true);
         $exceptionClass = $this->getExceptionClass();
 
         /** @var ExceptionInterface $exception */
-        $exception = $exceptionClass::create($message, null, $previous);
+        $exception = $exceptionClass::create($message, 0, $previous);
 
         parent::assertSame($previous, $exception->getPrevious());
     }

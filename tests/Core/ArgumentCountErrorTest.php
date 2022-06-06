@@ -23,7 +23,7 @@ use CoiSA\Exception\AbstractExceptionTestCase;
  * @package CoiSA\Exception\Core
  *
  * @internal
- * @coversNothing
+ * @coversDefaultClass \CoiSA\Exception\Core\ArgumentCountError
  */
 final class ArgumentCountErrorTest extends AbstractExceptionTestCase
 {
@@ -32,6 +32,9 @@ final class ArgumentCountErrorTest extends AbstractExceptionTestCase
         return ArgumentCountError::class;
     }
 
+    /**
+     * @covers ::forExpectedNoArgument
+     */
     public function testForExpectedNoArgumentWillReturnArgumentCountError(): void
     {
         $code     = random_int(1, 1000);
@@ -52,6 +55,9 @@ final class ArgumentCountErrorTest extends AbstractExceptionTestCase
         parent::assertSame($previous, $argumentCountError->getPrevious());
     }
 
+    /**
+     * @covers ::forExpectedAtLeast
+     */
     public function testForExpectedAtLeastWithLengthWillReturnArgumentCountErrorWithLengthOnMessage(): void
     {
         $length          = random_int(1, 1000);
@@ -74,6 +80,9 @@ final class ArgumentCountErrorTest extends AbstractExceptionTestCase
         parent::assertSame($previous, $argumentCountError->getPrevious());
     }
 
+    /**
+     * @covers ::forExpectedExactAmount
+     */
     public function testForExpectedExactAmountWithLengthWillReturnArgumentCountErrorWithLengthOnMessage(): void
     {
         $length          = random_int(1, 1000);

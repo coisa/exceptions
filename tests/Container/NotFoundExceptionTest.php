@@ -23,7 +23,7 @@ use CoiSA\Exception\AbstractExceptionTestCase;
  * @package CoiSA\Exception\Container
  *
  * @internal
- * @coversNothing
+ * @coversDefaultClass \CoiSA\Exception\Container\NotFoundException
  */
 final class NotFoundExceptionTest extends AbstractExceptionTestCase
 {
@@ -32,6 +32,9 @@ final class NotFoundExceptionTest extends AbstractExceptionTestCase
         return NotFoundException::class;
     }
 
+    /**
+     * @covers ::forNotFoundIdentifierFactory
+     */
     public function testForNotFoundIdentifierFactoryWillReturnNotFoundException(): void
     {
         $id       = uniqid('id', true);

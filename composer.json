@@ -26,18 +26,12 @@
     "autoload": {
         "psr-4": {
             "CoiSA\\Exception\\": "src"
-        },
-        "classmap": [
-            "src"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
             "CoiSA\\Exception\\": "tests"
-        },
-        "classmap": [
-            "tests"
-        ]
+        }
     },
     "config": {
         "platform": {
