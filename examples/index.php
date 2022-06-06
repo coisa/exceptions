@@ -13,10 +13,13 @@ declare(strict_types=1);
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
+use CoiSA\Exception\Core\ArgumentCountError;
+use CoiSA\Exception\Spl\InvalidArgumentException;
+use CoiSA\Exception\Spl\RuntimeException;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
-// docker run --rm --volume $PWD:/app php:5.3 php /app/examples/index.php
-var_dump(
-    \CoiSA\Exception\Core\ArgumentCountError::forExpectedAtLeaseOneArgument(),
-    get_included_files()
-);
+$exception     = ArgumentCountError::forExpectedExactAmount(1);
+$wrapThrowable = InvalidArgumentException::createFromThrowable($exception);
+
+RuntimeException::throw('Runtime exception!', 102, $wrapThrowable);
