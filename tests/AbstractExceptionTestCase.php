@@ -146,4 +146,36 @@ abstract class AbstractExceptionTestCase extends TestCase
 
         parent::assertSame($previous, $exception->getPrevious());
     }
+
+    /**
+     * @dataProvider providePreviousException
+     * @covers ::createFromThrowable
+     */
+    public function testCreateFromThrowableWillReturnExceptionWithMessageCodeFromPrevious(\Throwable $throwable): void
+    {
+        $exceptionClass = $this->getExceptionClass();
+
+        /** @var ExceptionInterface $exception */
+        $exception = $exceptionClass::createFromThrowable($throwable);
+
+        parent::assertSame($throwable, $exception->getPrevious());
+        parent::assertSame($throwable->getMessage(), $exception->getMessage());
+        parent::assertSame($throwable->getCode(), $exception->getCode());
+    }
+
+    /**
+     * @covers ::throw
+     */
+    public function testThrowWillThrowExceptionWithGivenMessageAndCode(): void
+    {
+        $message        = uniqid('message', true);
+        $code           = random_int(1, 1000);
+        $exceptionClass = $this->getExceptionClass();
+
+        parent::expectException($exceptionClass);
+        parent::expectExceptionMessage($message);
+        parent::expectExceptionCode($code);
+
+        $exceptionClass::throw($message, $code);
+    }
 }

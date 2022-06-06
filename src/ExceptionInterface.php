@@ -22,9 +22,18 @@ namespace CoiSA\Exception;
  */
 interface ExceptionInterface extends Throwable
 {
-    public static function create(
-        string $message,
-        int $code = 0,
-        \Throwable $previous = null
-    ): Throwable;
+    /**
+     * Create a new exception instance.
+     */
+    public static function create(string $message, int $code = 0, \Throwable $previous = null): self;
+
+    /**
+     * Wrap a throwable into a new exception.
+     */
+    public static function createFromThrowable(\Throwable $throwable): self;
+
+    /**
+     * Create and throw a new exception.
+     */
+    public static function throw(string $message, int $code = 0, \Throwable $previous = null): void;
 }

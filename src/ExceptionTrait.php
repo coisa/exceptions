@@ -21,4 +21,14 @@ trait ExceptionTrait
     {
         return new self($message, $code, $previous);
     }
+
+    public static function createFromThrowable(\Throwable $throwable): ExceptionInterface
+    {
+        return new self($throwable->getMessage(), $throwable->getCode(), $throwable);
+    }
+
+    public static function throw(string $message, int $code = 0, \Throwable $previous = null): void
+    {
+        throw static::create($message, $code, $previous);
+    }
 }
