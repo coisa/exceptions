@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of coisa/exceptions.
  *
@@ -7,10 +9,10 @@
  * with this source code in the file LICENSE.
  *
  * @link      https://github.com/coisa/exceptions
- *
- * @copyright Copyright (c) 2020 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
+ * @copyright Copyright (c) 2020-2022 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
  * @license   https://opensource.org/licenses/MIT MIT License
  */
+
 namespace CoiSA\Exception\Container;
 
 use CoiSA\Exception\AbstractExceptionTestCase;
@@ -19,35 +21,35 @@ use CoiSA\Exception\AbstractExceptionTestCase;
  * Class NotFoundExceptionTest.
  *
  * @package CoiSA\Exception\Container
+ *
+ * @internal
+ * @coversNothing
  */
 final class NotFoundExceptionTest extends AbstractExceptionTestCase
 {
-    /**
-     * @return string
-     */
-    public function getExceptionClass()
+    public function getExceptionClass(): string
     {
-        return __NAMESPACE__ . '\\NotFoundException';
+        return NotFoundException::class;
     }
 
-    public function testForNotFoundIdentifierFactoryWillReturnNotFoundException()
+    public function testForNotFoundIdentifierFactoryWillReturnNotFoundException(): void
     {
-        $id       = \uniqid('id', true);
-        $code     = \mt_rand(1, 1000);
+        $id       = uniqid('id', true);
+        $code     = random_int(1, 1000);
         $previous = new \Exception(
-            \uniqid('message', true),
-            \mt_rand(1, 1000)
+            uniqid('message', true),
+            random_int(1, 1000)
         );
 
         /** @var NotFoundException $notFoundException */
         $notFoundException = NotFoundException::forNotFoundIdentifierFactory($id, $code, $previous);
 
-        self::assertInstanceOf(__NAMESPACE__ . '\\NotFoundException', $notFoundException);
-        self::assertEquals(
-            \sprintf(NotFoundException::MESSAGE_NOT_FOUND_IDENTIFIER_FACTORY, $id),
+        parent::assertInstanceOf(NotFoundException::class, $notFoundException);
+        parent::assertSame(
+            sprintf(NotFoundException::MESSAGE_NOT_FOUND_IDENTIFIER_FACTORY, $id),
             $notFoundException->getMessage()
         );
-        self::assertEquals($code, $notFoundException->getCode());
-        self::assertSame($previous, $notFoundException->getPrevious());
+        parent::assertSame($code, $notFoundException->getCode());
+        parent::assertSame($previous, $notFoundException->getPrevious());
     }
 }

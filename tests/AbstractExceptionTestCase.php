@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of coisa/exceptions.
  *
@@ -7,10 +9,10 @@
  * with this source code in the file LICENSE.
  *
  * @link      https://github.com/coisa/exceptions
- *
- * @copyright Copyright (c) 2020 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
+ * @copyright Copyright (c) 2020-2022 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
  * @license   https://opensource.org/licenses/MIT MIT License
  */
+
 namespace CoiSA\Exception;
 
 use PHPUnit\Framework\TestCase;
@@ -22,103 +24,97 @@ use PHPUnit\Framework\TestCase;
  */
 abstract class AbstractExceptionTestCase extends TestCase
 {
-    /**
-     * @return string
-     */
-    abstract public function getExceptionClass();
+    abstract public function getExceptionClass(): string;
 
     public function providePreviousException()
     {
-        $message = \uniqid('previous message', true);
-        $code    = \mt_rand(1, 1000);
+        $message = uniqid('previous message', true);
+        $code    = random_int(1, 1000);
 
-        return array(
-            array(new \Exception($message, $code)),
-            array(new Container\ContainerException($message, $code)),
-            array(new Container\NotFoundException($message, $code)),
-            array(new Core\ArgumentCountError($message, $code)),
-            array(new Core\ArithmeticError($message, $code)),
-            array(new Core\AssertionError($message, $code)),
-            array(new Core\CompileError($message, $code)),
-            array(new Core\DivisionByZeroError($message, $code)),
-            array(new Core\Error($message, $code)),
-            array(new Core\Exception($message, $code)),
-            array(new Core\ParseError($message, $code)),
-            array(new Core\TypeError($message, $code)),
-            array(new Json\JsonException($message, $code)),
-            array(new Spl\BadFunctionCallException($message, $code)),
-            array(new Spl\BadMethodCallException($message, $code)),
-            array(new Spl\DomainException($message, $code)),
-            array(new Spl\InvalidArgumentException($message, $code)),
-            array(new Spl\LengthException($message, $code)),
-            array(new Spl\LogicException($message, $code)),
-            array(new Spl\OutOfBoundsException($message, $code)),
-            array(new Spl\OutOfRangeException($message, $code)),
-            array(new Spl\OverflowException($message, $code)),
-            array(new Spl\RangeException($message, $code)),
-            array(new Spl\ReflectionException($message, $code)),
-            array(new Spl\RuntimeException($message, $code)),
-            array(new Spl\UnderflowException($message, $code)),
-            array(new Spl\UnexpectedValueException($message, $code)),
-        );
+        return [
+            [new \Exception($message, $code)],
+            [new Container\ContainerException($message, $code)],
+            [new Container\NotFoundException($message, $code)],
+            [new Core\ArgumentCountError($message, $code)],
+            [new Core\ArithmeticError($message, $code)],
+            [new Core\AssertionError($message, $code)],
+            [new Core\CompileError($message, $code)],
+            [new Core\DivisionByZeroError($message, $code)],
+            [new Core\Error($message, $code)],
+            [new Core\Exception($message, $code)],
+            [new Core\ParseError($message, $code)],
+            [new Core\TypeError($message, $code)],
+            [new Json\JsonException($message, $code)],
+            [new Spl\BadFunctionCallException($message, $code)],
+            [new Spl\BadMethodCallException($message, $code)],
+            [new Spl\DomainException($message, $code)],
+            [new Spl\InvalidArgumentException($message, $code)],
+            [new Spl\LengthException($message, $code)],
+            [new Spl\LogicException($message, $code)],
+            [new Spl\OutOfBoundsException($message, $code)],
+            [new Spl\OutOfRangeException($message, $code)],
+            [new Spl\OverflowException($message, $code)],
+            [new Spl\RangeException($message, $code)],
+            [new Spl\ReflectionException($message, $code)],
+            [new Spl\RuntimeException($message, $code)],
+            [new Spl\UnderflowException($message, $code)],
+            [new Spl\UnexpectedValueException($message, $code)],
+        ];
     }
 
-    public function testExceptionImplementInterfaces()
+    public function testExceptionImplementInterfaces(): void
     {
         $exceptionClass = $this->getExceptionClass();
         $exception      = new $exceptionClass();
 
-        self::assertInstanceOf('Throwable', $exception);
-        self::assertInstanceOf('CoiSA\\Exception\\Throwable', $exception);
-        self::assertInstanceOf('CoiSA\\Exception\\ExceptionInterface', $exception);
+        parent::assertInstanceOf(\Throwable::class, $exception);
+        parent::assertInstanceOf(Throwable::class, $exception);
+        parent::assertInstanceOf(ExceptionInterface::class, $exception);
     }
 
-    public function testCreateWillReturnInstanceOfSameException()
+    public function testCreateWillReturnInstanceOfSameException(): void
     {
         $exceptionClass = $this->getExceptionClass();
 
-        /** @var \Throwable $exception */
-        $exception = $exceptionClass::create(\uniqid('message', true));
+        /** @var ExceptionInterface $exception */
+        $exception = $exceptionClass::create(uniqid('message', true));
 
-        self::assertInstanceOf($exceptionClass, $exception);
+        parent::assertInstanceOf($exceptionClass, $exception);
     }
 
-    public function testCreateWillReturnExceptionWithGivenMessage()
+    public function testCreateWillReturnExceptionWithGivenMessage(): void
     {
-        $message = \uniqid('message', true);
+        $message = uniqid('message', true);
 
         $exceptionClass = $this->getExceptionClass();
 
-        /** @var \Throwable $exception */
+        /** @var ExceptionInterface $exception */
         $exception = $exceptionClass::create($message);
 
-        self::assertEquals($message, $exception->getMessage());
+        parent::assertSame($message, $exception->getMessage());
     }
 
-    public function testCreateWithoutCodeWillReturnExceptionWithZeroCode()
+    public function testCreateWithoutCodeWillReturnExceptionWithZeroCode(): void
     {
         $exceptionClass = $this->getExceptionClass();
 
-        /** @var \Throwable $exception */
-        $exception = $exceptionClass::create(
-            \uniqid('message', true),
-            null
-        );
+        /** @var ExceptionInterface $exception */
+        $exception = $exceptionClass::create(uniqid('message', true));
 
-        self::assertEquals(0, $exception->getCode());
+        parent::assertSame(0, $exception->getCode());
     }
 
-    public function testCreateWithCodeWillReturnExceptionWithGivenCode()
+    public function testCreateWithCodeWillReturnExceptionWithGivenCode(): void
     {
-        $message  = \uniqid('message', true);
-        $code     = \mt_rand(1, 1000);
+        $message  = uniqid('message', true);
+        $code     = random_int(1, 1000);
 
         $exceptionClass = $this->getExceptionClass();
 
-        /** @var \Throwable $exception */
+        /** @var ExceptionInterface $exception */
         $exception = $exceptionClass::create($message, $code);
 
-        self::assertEquals($code, $exception->getCode());
+        parent::assertSame($code, $exception->getCode());
     }
 
     /**
@@ -126,14 +122,14 @@ abstract class AbstractExceptionTestCase extends TestCase
      *
      * @param mixed $previous
      */
-    public function testCreateWithPreviousWillReturnExceptionWithGivenPrevious($previous)
+    public function testCreateWithPreviousWillReturnExceptionWithGivenPrevious($previous): void
     {
-        $message        = \uniqid('message', true);
+        $message        = uniqid('message', true);
         $exceptionClass = $this->getExceptionClass();
 
-        /** @var \Throwable $exception */
+        /** @var ExceptionInterface $exception */
         $exception = $exceptionClass::create($message, null, $previous);
 
-        self::assertSame($previous, $exception->getPrevious());
+        parent::assertSame($previous, $exception->getPrevious());
     }
 }

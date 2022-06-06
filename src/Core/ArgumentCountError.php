@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of coisa/exceptions.
  *
@@ -7,10 +9,10 @@
  * with this source code in the file LICENSE.
  *
  * @link      https://github.com/coisa/exceptions
- *
- * @copyright Copyright (c) 2020 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
+ * @copyright Copyright (c) 2020-2022 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
  * @license   https://opensource.org/licenses/MIT MIT License
  */
+
 namespace CoiSA\Exception\Core;
 
 use CoiSA\Exception\ExceptionInterface;
@@ -23,27 +25,26 @@ use CoiSA\Exception\ExceptionInterface;
 class ArgumentCountError extends \ArgumentCountError implements ExceptionInterface
 {
     /** @const string */
-    const MESSAGE_EXPECTED_NO_ARGUMENT = 'This closure do not expect any argument.';
+    public const MESSAGE_EXPECTED_NO_ARGUMENT = 'This closure do not expect any argument.';
 
     /** @const string */
-    const MESSAGE_EXPECTED_AT_LEAST = 'You should inform at least "%d" arguments.';
+    public const MESSAGE_EXPECTED_AT_LEAST = 'You should inform at least "%d" arguments.';
 
     /** @const string */
-    const MESSAGE_EXPECTED_EXACT_AMOUNT = 'You should inform exactly "%d" arguments.';
+    public const MESSAGE_EXPECTED_EXACT_AMOUNT = 'You should inform exactly "%d" arguments.';
 
     /**
      * {@inheritdoc}
      */
     public static function create($message, $code = 0, $previous = null)
     {
-        $exceptionClass = \get_called_class();
+        $exceptionClass = static::class;
 
         return new $exceptionClass($message, $code, $previous);
     }
 
     /**
-     * @param int             $code
-     * @param null|\Exception $previous
+     * @param int $code
      *
      * @return ArgumentCountError
      */
@@ -61,7 +62,7 @@ class ArgumentCountError extends \ArgumentCountError implements ExceptionInterfa
      */
     public static function forExpectedAtLeast($length = 1, $code = 0, $previous = null)
     {
-        $message = \sprintf(
+        $message = sprintf(
             self::MESSAGE_EXPECTED_AT_LEAST,
             $length
         );
@@ -78,7 +79,7 @@ class ArgumentCountError extends \ArgumentCountError implements ExceptionInterfa
      */
     public static function forExpectedExactAmount($length = 1, $code = 0, $previous = null)
     {
-        $message = \sprintf(
+        $message = sprintf(
             self::MESSAGE_EXPECTED_EXACT_AMOUNT,
             $length
         );

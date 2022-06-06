@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of coisa/exceptions.
  *
@@ -7,10 +9,10 @@
  * with this source code in the file LICENSE.
  *
  * @link      https://github.com/coisa/exceptions
- *
- * @copyright Copyright (c) 2020 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
+ * @copyright Copyright (c) 2020-2022 Felipe Sayão Lobato Abreu <github@felipeabreu.com.br>
  * @license   https://opensource.org/licenses/MIT MIT License
  */
+
 namespace CoiSA\Exception\Spl;
 
 use CoiSA\Exception\ExceptionInterface;
@@ -23,17 +25,17 @@ use CoiSA\Exception\ExceptionInterface;
 class ReflectionException extends \ReflectionException implements ExceptionInterface
 {
     /** @const string */
-    const MESSAGE_CLASS_NOT_FOUND = 'Class "%s" not found!';
+    public const MESSAGE_CLASS_NOT_FOUND = 'Class "%s" not found!';
 
     /** @const string */
-    const MESSAGE_CLASS_NOT_SUBCLASS_OF = 'Given class "%s" are not a subclass of "%s".';
+    public const MESSAGE_CLASS_NOT_SUBCLASS_OF = 'Given class "%s" are not a subclass of "%s".';
 
     /**
      * {@inheritdoc}
      */
     public static function create($message, $code = 0, $previous = null)
     {
-        $exceptionClass = \get_called_class();
+        $exceptionClass = static::class;
 
         return new $exceptionClass($message, $code, $previous);
     }
@@ -47,7 +49,7 @@ class ReflectionException extends \ReflectionException implements ExceptionInter
      */
     public static function forClassNotFound($class, $code = 0, $previous = null)
     {
-        $message = \sprintf(
+        $message = sprintf(
             self::MESSAGE_CLASS_NOT_FOUND,
             $class
         );
@@ -65,7 +67,7 @@ class ReflectionException extends \ReflectionException implements ExceptionInter
      */
     public static function forClassNotSubclassOf($class, $subclass, $code = 0, $previous = null)
     {
-        $message = \sprintf(
+        $message = sprintf(
             self::MESSAGE_CLASS_NOT_SUBCLASS_OF,
             $class,
             $subclass
