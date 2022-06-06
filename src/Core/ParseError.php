@@ -27,10 +27,8 @@ class ParseError extends \ParseError implements ExceptionInterface
     /**
      * {@inheritdoc}
      */
-    public static function create($message, $code = 0, $previous = null)
+    public static function create(string $message, int $code = 0, \Throwable $previous = null): self
     {
-        $exceptionClass = static::class;
-
-        return new $exceptionClass($message, $code, $previous);
+        return new self($message, $code, $previous);
     }
 }

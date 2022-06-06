@@ -27,10 +27,8 @@ class BadFunctionCallException extends \BadFunctionCallException implements Exce
     /**
      * {@inheritdoc}
      */
-    public static function create($message, $code = 0, $previous = null)
+    public static function create(string $message, int $code = 0, \Throwable $previous = null): self
     {
-        $exceptionClass = static::class;
-
-        return new $exceptionClass($message, $code, $previous);
+        return new self($message, $code, $previous);
     }
 }

@@ -36,31 +36,17 @@ class ArgumentCountError extends \ArgumentCountError implements ExceptionInterfa
     /**
      * {@inheritdoc}
      */
-    public static function create($message, $code = 0, $previous = null)
+    public static function create(string $message, int $code = 0, \Throwable $previous = null): self
     {
-        $exceptionClass = static::class;
-
-        return new $exceptionClass($message, $code, $previous);
+        return new self($message, $code, $previous);
     }
 
-    /**
-     * @param int $code
-     *
-     * @return ArgumentCountError
-     */
-    public static function forExpectedNoArgument($code = 0, \Exception $previous = null)
+    public static function forExpectedNoArgument(int $code = 0, \Throwable $previous = null): self
     {
         return self::create(self::MESSAGE_EXPECTED_NO_ARGUMENT, $code, $previous);
     }
 
-    /**
-     * @param int             $length
-     * @param int             $code
-     * @param null|\Exception $previous
-     *
-     * @return ArgumentCountError
-     */
-    public static function forExpectedAtLeast($length = 1, $code = 0, $previous = null)
+    public static function forExpectedAtLeast(int $length = 1, int $code = 0, \Throwable $previous = null): self
     {
         $message = sprintf(
             self::MESSAGE_EXPECTED_AT_LEAST,
@@ -70,14 +56,7 @@ class ArgumentCountError extends \ArgumentCountError implements ExceptionInterfa
         return self::create($message, $code, $previous);
     }
 
-    /**
-     * @param int             $length
-     * @param int             $code
-     * @param null|\Exception $previous
-     *
-     * @return ArgumentCountError
-     */
-    public static function forExpectedExactAmount($length = 1, $code = 0, $previous = null)
+    public static function forExpectedExactAmount(int $length = 1, int $code = 0, \Throwable $previous = null): self
     {
         $message = sprintf(
             self::MESSAGE_EXPECTED_EXACT_AMOUNT,

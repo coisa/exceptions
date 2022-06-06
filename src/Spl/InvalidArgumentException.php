@@ -30,23 +30,17 @@ class InvalidArgumentException extends \InvalidArgumentException implements Exce
     /**
      * {@inheritdoc}
      */
-    public static function create($message, $code = 0, $previous = null)
+    public static function create(string $message, int $code = 0, \Throwable $previous = null): self
     {
-        $exceptionClass = static::class;
-
-        return new $exceptionClass($message, $code, $previous);
+        return new self($message, $code, $previous);
     }
 
-    /**
-     * @param string          $argumentName
-     * @param string          $expectedType
-     * @param int             $code
-     * @param null|\Exception $previous
-     *
-     * @return InvalidArgumentException
-     */
-    public static function forInvalidArgumentType($argumentName, $expectedType, $code = 0, $previous = null)
-    {
+    public static function forInvalidArgumentType(
+        string $argumentName,
+        string $expectedType,
+        int $code = 0,
+        \Throwable $previous = null
+    ): self {
         $message = sprintf(
             self::MESSAGE_INVALID_ARGUMENT_TYPE,
             $argumentName,

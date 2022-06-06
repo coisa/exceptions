@@ -33,21 +33,12 @@ class ReflectionException extends \ReflectionException implements ExceptionInter
     /**
      * {@inheritdoc}
      */
-    public static function create($message, $code = 0, $previous = null)
+    public static function create(string $message, int $code = 0, \Throwable $previous = null): self
     {
-        $exceptionClass = static::class;
-
-        return new $exceptionClass($message, $code, $previous);
+        return new self($message, $code, $previous);
     }
 
-    /**
-     * @param string                     $class
-     * @param int                        $code
-     * @param null|\Exception|\Throwable $previous
-     *
-     * @return UnexpectedValueException
-     */
-    public static function forClassNotFound($class, $code = 0, $previous = null)
+    public static function forClassNotFound(string $class, int $code = 0, \Throwable $previous = null): self
     {
         $message = sprintf(
             self::MESSAGE_CLASS_NOT_FOUND,
@@ -57,16 +48,12 @@ class ReflectionException extends \ReflectionException implements ExceptionInter
         return self::create($message, $code, $previous);
     }
 
-    /**
-     * @param string                     $class
-     * @param string                     $subclass
-     * @param int                        $code
-     * @param null|\Exception|\Throwable $previous
-     *
-     * @return \CoiSA\Factory\Exception\ReflectionException
-     */
-    public static function forClassNotSubclassOf($class, $subclass, $code = 0, $previous = null)
-    {
+    public static function forClassNotSubclassOf(
+        string $class,
+        string $subclass,
+        int $code = 0,
+        \Throwable $previous = null
+    ): self {
         $message = sprintf(
             self::MESSAGE_CLASS_NOT_SUBCLASS_OF,
             $class,

@@ -22,12 +22,9 @@ namespace CoiSA\Exception;
  */
 interface ExceptionInterface extends Throwable
 {
-    /**
-     * @param string                     $message
-     * @param int                        $code
-     * @param null|\Exception|\Throwable $previous
-     *
-     * @return Throwable
-     */
-    public static function create($message, $code = 0, $previous = null);
+    public static function create(
+        string $message,
+        int $code = 0,
+        \Throwable $previous = null
+    ): Throwable;
 }

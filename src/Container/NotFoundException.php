@@ -32,21 +32,12 @@ class NotFoundException extends ContainerException implements NotFoundExceptionI
     /**
      * {@inheritdoc}
      */
-    public static function create($message, $code = 0, $previous = null)
+    public static function create(string $message, int $code = 0, \Throwable $previous = null): self
     {
-        $exceptionClass = static::class;
-
-        return new $exceptionClass($message, $code, $previous);
+        return new self($message, $code, $previous);
     }
 
-    /**
-     * @param string                     $id
-     * @param int                        $code
-     * @param null|\Exception|\Throwable $previous
-     *
-     * @return NotFoundException
-     */
-    public static function forNotFoundIdentifierFactory($id, $code = 0, $previous = null)
+    public static function forNotFoundIdentifierFactory(string $id, int $code = 0, \Throwable $previous = null): self
     {
         $message = sprintf(
             self::MESSAGE_NOT_FOUND_IDENTIFIER_FACTORY,

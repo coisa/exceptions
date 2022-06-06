@@ -33,21 +33,12 @@ class ContainerException extends \Exception implements ExceptionInterface, Conta
     /**
      * {@inheritdoc}
      */
-    public static function create($message, $code = 0, $previous = null)
+    public static function create(string $message, int $code = 0, \Throwable $previous = null): self
     {
-        $exceptionClass = static::class;
-
-        return new $exceptionClass($message, $code, $previous);
+        return new self($message, $code, $previous);
     }
 
-    /**
-     * @param \Exception|\Throwable $exception
-     * @param string                $id
-     * @param int                   $code
-     *
-     * @return ContainerException
-     */
-    public static function forExceptionResolvingIdentifier($exception, $id, $code = 0)
+    public static function forExceptionResolvingIdentifier(\Throwable $exception, string $id, int $code = 0): self
     {
         $message = sprintf(
             self::MESSAGE_EXCEPTION_RESOLVING_IDENTIFIER,
