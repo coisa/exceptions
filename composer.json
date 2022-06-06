@@ -56,6 +56,6 @@
         "cs-fix": "php-cs-fixer fix",
         "lint": "parallel-lint --exclude vendor .",
         "sniff": "phpcs",
-        "test": "phpunit --color=always"
+        "test": "phpunit --color=always --testdox"
     }
 }
