@@ -74,4 +74,44 @@ final class ReflectionExceptionTest extends AbstractExceptionTestCase
         parent::assertSame($code, $reflectionException->getCode());
         parent::assertSame($previous, $reflectionException->getPrevious());
     }
+
+    public function testForClassAttributeNotFoundWillReturnReflectionException(): void
+    {
+        $attribute = uniqid('attribute', true);
+        $code      = random_int(1, 1000);
+        $previous  = new \Exception(
+            uniqid('message', true),
+            random_int(1, 1000)
+        );
+
+        $reflectionException = ReflectionException::forClassAttributeNotFound($attribute, $code, $previous);
+
+        parent::assertInstanceOf(ReflectionException::class, $reflectionException);
+        parent::assertSame(
+            sprintf(ReflectionException::MESSAGE_ATTRIBUTE_CLASS_NOT_FOUND, $attribute),
+            $reflectionException->getMessage()
+        );
+        parent::assertSame($code, $reflectionException->getCode());
+        parent::assertSame($previous, $reflectionException->getPrevious());
+    }
+
+    public function testForUninstantiableClassWillReturnReflectionException(): void
+    {
+        $class     = uniqid('class', true);
+        $code      = random_int(1, 1000);
+        $previous  = new \Exception(
+            uniqid('message', true),
+            random_int(1, 1000)
+        );
+
+        $reflectionException = ReflectionException::forUninstantiableClass($class, $code, $previous);
+
+        parent::assertInstanceOf(ReflectionException::class, $reflectionException);
+        parent::assertSame(
+            sprintf(ReflectionException::MESSAGE_UNINSTANTIABLE_CLASS, $class),
+            $reflectionException->getMessage()
+        );
+        parent::assertSame($code, $reflectionException->getCode());
+        parent::assertSame($previous, $reflectionException->getPrevious());
+    }
 }
