@@ -33,6 +33,12 @@ class ReflectionException extends \ReflectionException implements ExceptionInter
     /** @const string */
     public const MESSAGE_CLASS_NOT_SUBCLASS_OF = 'Given class "%s" are not a subclass of "%s".';
 
+    /** @const string */
+    public const MESSAGE_UNINSTANTIABLE_CLASS = 'Given class "%s" cannot be instantiated.';
+
+    /** @const string */
+    public const MESSAGE_ATTRIBUTE_CLASS_NOT_FOUND = 'Attribute "%s" not found on class definition.';
+
     public static function forClassNotFound(string $class, int $code = 0, \Throwable $previous = null): self
     {
         $message = sprintf(
@@ -53,6 +59,29 @@ class ReflectionException extends \ReflectionException implements ExceptionInter
             self::MESSAGE_CLASS_NOT_SUBCLASS_OF,
             $class,
             $subclass
+        );
+
+        return self::create($message, $code, $previous);
+    }
+
+    public static function forClassAttributeNotFound(
+        string $attribute,
+        int $code = 0,
+        \Throwable $previous = null
+    ): self {
+        $message = sprintf(
+            self::MESSAGE_ATTRIBUTE_CLASS_NOT_FOUND,
+            $attribute
+        );
+
+        return self::create($message, $code, $previous);
+    }
+
+    public static function forUninstantiableClass(string $class, int $code = 0, \Throwable $previous = null): self
+    {
+        $message = sprintf(
+            self::MESSAGE_UNINSTANTIABLE_CLASS,
+            $class
         );
 
         return self::create($message, $code, $previous);
